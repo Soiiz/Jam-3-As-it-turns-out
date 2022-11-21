@@ -6,7 +6,8 @@ export (int) var speed = 200
 # var a = 2
 # var b = "text"
 var velocity = Vector2()
-onready var sprite = get_node("Sprite")
+onready var sprite = $Sprite
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -28,10 +29,10 @@ func _physics_process(delta):
 	get_input()
 	velocity = move_and_slide(velocity)
 	# keep object on screen
-	position.x = clamp(position.x, sprite.texture.get_width() / 2, get_viewport_rect().size.x - sprite.texture.get_width() / 2)
-	position.y = clamp(position.y, sprite.texture.get_height() / 2, get_viewport_rect().size.y - sprite.texture.get_height() / 2)
+	position.x = clamp(position.x, sprite.texture.get_width() * sprite.scale.x / 2, get_viewport_rect().size.x - sprite.texture.get_width() * sprite.scale.x / 2)
+	position.y = clamp(position.y, sprite.texture.get_height() * sprite.scale.y / 2, get_viewport_rect().size.y - sprite.texture.get_height() * sprite.scale.y / 2)
 	# rotate sprite based on velocity direction
 	if velocity.length() > 0:
-		rotation = velocity.angle() + PI/2
+		rotation = velocity.angle() + PI*3/2
 	
 
