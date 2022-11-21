@@ -2,10 +2,8 @@ extends KinematicBody2D
 
 export (int) var speed = 200
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
 var velocity = Vector2()
+var hp = 100 # subject to implementation change as values need to be passed around
 onready var sprite = $Sprite
 
 
@@ -34,5 +32,10 @@ func _physics_process(delta):
 	# rotate sprite based on velocity direction
 	if velocity.length() > 0:
 		rotation = velocity.angle() + PI*3/2
+
+func take_damage(damage):
+    hp -= damage
+    print(hp)
+
 	
 
