@@ -1,0 +1,23 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Scripts/DialogueLoad.gd" type="Script" id=1]
+
+[node name="CanvasLayer" type="CanvasLayer"]
+script = ExtResource( 1 )
+dialogue_file = "res://Scripts/dialogue/dialogue.json"
+
+[node name="Panel" type="Panel" parent="."]
+margin_right = 278.0
+margin_bottom = 114.0
+
+[node name="Name" type="RichTextLabel" parent="Panel"]
+margin_right = 42.0
+margin_bottom = 19.0
+text = "Name"
+
+[node name="Message" type="RichTextLabel" parent="Panel"]
+margin_left = 22.0
+margin_top = 23.0
+margin_right = 214.0
+margin_bottom = 81.0
+text = "Message"
