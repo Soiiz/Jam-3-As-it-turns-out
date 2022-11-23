@@ -21,7 +21,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Jam- 3- As-it-turns-out"
-run/main_scene="res://Scenes/MannyTestScene.tscn"
+run/main_scene="res://Scenes/SampleCombatScene.tscn"
 config/icon="res://icon.png"
 
 [autoload]

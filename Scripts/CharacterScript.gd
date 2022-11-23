@@ -7,6 +7,7 @@ class_name ControllableCharacter
 # https://www.youtube.com/watch?v=BeSJgUTLmk0&ab_channel=HeartBeast reference for making script
 var moveBy : Vector2 = Vector2(0,0);
 var inputAllowed := true setget setInputAllowed, getInputAllowed;
+onready var myTween : Tween = get_node("Tween");
 export var maxSpeed := 100;
 export var acceleration := 20;
 
@@ -15,7 +16,11 @@ export var acceleration := 20;
 func _ready() -> void:
 	pass # Replace with function body.
 
-
+func tweenTo(_position : Vector2, time : float) -> void:
+	
+	myTween.interpolate_property(self, "position",self.position, _position, time,Tween.TRANS_LINEAR,Tween.EASE_IN);
+	myTween.start();
+	pass
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
 	if (!inputAllowed):
@@ -31,8 +36,9 @@ func get_input_axis() -> Vector2:
 	var to_return : Vector2 = Vector2.ZERO;
 	to_return.x =  int(Input.is_action_pressed("ui_right")) - int(Input.is_action_pressed("ui_left"));
 	to_return.y =  int(Input.is_action_pressed("ui_down")) - int(Input.is_action_pressed("ui_up"));
-	to_return.normalized();
+	to_return = to_return.normalized();
 	return to_return;
+
 
 
 func apply_friction(amount) -> void:
