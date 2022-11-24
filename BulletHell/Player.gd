@@ -34,8 +34,8 @@ func _physics_process(delta):
 		rotation = velocity.angle() + PI*3/2
 
 func take_damage(damage):
-    hp -= damage
-    print(hp)
+	hp -= damage
+	print(hp)
 
 	
 
