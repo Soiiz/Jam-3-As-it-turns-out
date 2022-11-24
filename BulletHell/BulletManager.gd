@@ -5,9 +5,10 @@ const bullet = preload("res://BulletHell/Bullet.tscn")
 export (int) var speed = 100
 
 #mode of bullet hell
-#0: all firing mode
-#1: pan shots
-#2: carpet shots
+#0: all firing modes
+#1: carpet shots
+#2: pan shots
+#4: targeted shots
 export (int) var mode = 0
 
 # timer for bullet fire rate
@@ -15,7 +16,7 @@ var timer = 0
 var delay = .2
 #timer for word spawn rate
 var word_timer = 0
-var word_delay = 2
+var word_delay = 1.5
 
 # queue for words includes letter position and direction
 # [[[letter, position, direction], [letter, position, direction]...]]
@@ -53,20 +54,36 @@ func _process(delta):
 	# runs functions to add bullets to queue
 	if word_timer <= 0:
 		if mode == 0:
-			var shot_type = randi() % 2
+			var shot_type = randi() % 3
 			if shot_type == 0:
-				pan_shot()
-			elif shot_type == 1:
 				carpet_shot()
+			elif shot_type == 1:
+				pan_shot()
+			elif shot_type == 2:
+				targeted_shot()
 		elif mode == 1:
-			pan_shot()
-		elif mode == 2:
 			carpet_shot()
+		elif mode == 2:
+			pan_shot()
+		elif mode == 3:
+			targeted_shot()
 		else:
 			print("Mode not set to a valid number")
 		word_timer = word_delay
 	else:
 		word_timer -= delta
+
+#adds to queue a word thats shot like a carpet bombing
+func carpet_shot():
+	var word_queue = []
+	var word = word_list[randi() % word_list.size()]
+	var carpet_direction = randi() % 2
+	var movement = clamp(randi() % 500, 200, 500) * (1 if carpet_direction else -1)
+	var position = Vector2(clamp(randi() % 1024, 0 if carpet_direction else -(movement), 1024 - (movement if carpet_direction else 0)), 0)
+	for letter in word if carpet_direction else reverse_string(word):
+		word_queue.append([letter, position, 90])
+		position += Vector2(movement / word.length() - 1, 0)
+	queue.append(word_queue)
 
 # adds to queue a word thats shot in a panning motion
 func pan_shot(): 
@@ -83,21 +100,26 @@ func pan_shot():
 		direction += (1 if pan_direction else -1) * rotation_amount / (word.length() - 1)
 	queue.append(word_queue)
 	
-#adds to queue a word thats shot like a carpet bombing
-func carpet_shot():
-	var word_queue = []
+#instantly fires all the words
+# please help there must be a better way to do this using angles
+func targeted_shot():
 	var word = word_list[randi() % word_list.size()]
-	var carpet_direction = randi() % 2
-	var movement = clamp(randi() % 500, 200, 500) * (1 if carpet_direction else -1)
-	var position = Vector2(clamp(randi() % 1024, 0 if carpet_direction else -(movement), 1024 - (movement if carpet_direction else 0)), 0)
-	
-	
-	for letter in word if carpet_direction else reverse_string(word):
-		word_queue.append([letter, position, 90])
-		position += Vector2(movement / word.length() - 1, 0)
-	queue.append(word_queue)
-	
-
+	var length = clamp(randi() % 1024, 200, 1024)
+	var position = Vector2(randi() % 1024 - length,0)
+	var player_position = get_parent().get_node("Player").position
+	var letter_list = []
+	var longest_distance = 0
+	for letter in word:
+		var velocity = player_position - position
+		if velocity.length() > longest_distance:
+			longest_distance = velocity.length()
+		letter_list.append([letter, velocity])
+		position += Vector2(length / (word.length() - 1), 0)
+	for bullet in letter_list:
+		var bullet_vector = bullet[1].normalized() * longest_distance
+		shoot(bullet[0], speed, player_position - bullet_vector, bullet[1].angle() * 180 / PI)
+		
+		
 #reverse string function
 #credits: https://www.reddit.com/r/godot/comments/o9owcw/comment/h3ci1by/?utm_source=share&utm_medium=web2x&context=3
 func reverse_string(s:String) -> String:

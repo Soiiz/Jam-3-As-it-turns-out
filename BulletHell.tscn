@@ -8,7 +8,7 @@
 
 [node name="BulletManager" type="Node" parent="."]
 script = ExtResource( 1 )
-mode = 2
+speed = 150
 
 [node name="Player" type="KinematicBody2D" parent="."]
 position = Vector2( 512, 300 )
