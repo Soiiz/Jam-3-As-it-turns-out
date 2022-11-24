@@ -13,10 +13,10 @@ export (int) var mode = 0
 
 # timer for bullet fire rate
 var timer = 0
-var delay = .2
+export (float) var bullet_delay = .2
 #timer for word spawn rate
 var word_timer = 0
-var word_delay = 1.5
+export (float) var word_delay = 1.5
 
 # queue for words includes letter position and direction
 # [[[letter, position, direction], [letter, position, direction]...]]
@@ -47,7 +47,7 @@ func _process(delta):
 			word.pop_front()
 			if(word.size() == 0):
 				queue.erase(word)
-		timer = delay
+		timer = bullet_delay
 	else:
 		timer -= delta
 
