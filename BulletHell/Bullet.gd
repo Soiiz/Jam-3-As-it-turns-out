@@ -3,7 +3,7 @@ extends Node2D
 # credits to https://www.youtube.com/watch?v=miEi6IWvVgw&ab_channel=yokcos
 
 var velocity = Vector2()
-var duration = 10
+var duration = 20
 var letter = "" setget set_letter
 
 func _ready():
