@@ -1,36 +1,10 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Scripts/SampleCombatScene.gd" type="Script" id=1]
 [ext_resource path="res://Prefabs/PlayerCharacter.tscn" type="PackedScene" id=2]
 [ext_resource path="res://misc resources/ResetTurn.tres" type="Animation" id=3]
 [ext_resource path="res://Scenes/BulletHell.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scripts/OptionsScript.gd" type="Script" id=5]
-
-[sub_resource type="Animation" id=1]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/path = NodePath("Options:rotation_degrees")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ 90.0 ]
-}
-tracks/1/type = "method"
-tracks/1/path = NodePath("PlayerCharacter")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray(  ),
-"transitions": PoolRealArray(  ),
-"values": [  ]
-}
 
 [sub_resource type="Animation" id=2]
 resource_name = "Wingman1->2"
@@ -62,6 +36,110 @@ tracks/0/keys = {
 "values": [ 0.0, -90.0 ]
 }
 
+[sub_resource type="Animation" id=4]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("StaticBody2D/Top:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 475, -33 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("StaticBody2D/Right:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1050, 285 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("StaticBody2D/Bottom:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 485, 620 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("StaticBody2D/Left:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -25, 285 ) ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "WallsMoveIn"
+tracks/0/type = "value"
+tracks/0/path = NodePath("StaticBody2D/Right:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1050, 285 ), Vector2( 745, 285 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("StaticBody2D/Left:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( -25, 285 ), Vector2( 225, 285 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("StaticBody2D/Top:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 475, -33 ), Vector2( 485, 145 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("StaticBody2D/Bottom:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 485, 620 ), Vector2( 485, 425 ) ]
+}
+
+[sub_resource type="RectangleShape2D" id=6]
+
 [node name="SampleScene" type="Node2D"]
 script = ExtResource( 1 )
 
@@ -83,10 +161,44 @@ acceleration = 10000
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 reset_on_save = false
-anims/RESET = SubResource( 1 )
 anims/SceneAnimations = ExtResource( 3 )
 anims/Wingman1->2 = SubResource( 2 )
 anims/Wingman2->Player = SubResource( 3 )
+blend_times = [ "RESET", "SceneAnimations", 1.0, "RESET", "Wingman1->2", 1.0, "RESET", "Wingman2->Player", 1.0, "SceneAnimations", "SceneAnimations", 1.0, "SceneAnimations", "Wingman1->2", 1.0, "SceneAnimations", "Wingman2->Player", 1.0 ]
+
+[node name="BulletHellAnimator" type="AnimationPlayer" parent="."]
+root_node = NodePath("../BulletHellWalls")
+anims/RESET = SubResource( 4 )
+anims/WallsMoveIn = SubResource( 5 )
+
+[node name="BulletHellWalls" type="Node2D" parent="."]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="BulletHellWalls"]
+
+[node name="Right" type="CollisionShape2D" parent="BulletHellWalls/StaticBody2D"]
+position = Vector2( 1050, 285 )
+scale = Vector2( 1, 15 )
+shape = SubResource( 6 )
+
+[node name="Left" type="CollisionShape2D" parent="BulletHellWalls/StaticBody2D"]
+position = Vector2( -25, 285 )
+scale = Vector2( 1, 15 )
+shape = SubResource( 6 )
+
+[node name="Top" type="CollisionShape2D" parent="BulletHellWalls/StaticBody2D"]
+position = Vector2( 475, -33 )
+scale = Vector2( 25, 1 )
+shape = SubResource( 6 )
+
+[node name="Bottom" type="CollisionShape2D" parent="BulletHellWalls/StaticBody2D"]
+position = Vector2( 485, 620 )
+scale = Vector2( 25, 1 )
+shape = SubResource( 6 )
+
+[node name="BulletHell" parent="." instance=ExtResource( 4 )]
+
+[node name="BulletManager" parent="BulletHell" index="0"]
+playerPath = NodePath("../../PlayerCharacter")
 
 [node name="Options" type="Node2D" parent="."]
 position = Vector2( 480, 601 )
@@ -189,11 +301,6 @@ text = "Gift"
 __meta__ = {
 "_edit_use_anchors_": true
 }
-
-[node name="BulletHell" parent="." instance=ExtResource( 4 )]
-
-[node name="BulletManager" parent="BulletHell" index="0"]
-playerPath = NodePath("../../PlayerCharacter")
 
 [connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]
 [connection signal="pressed" from="Options/Wingman1Options/W1O1" to="Options" method="_on_W1O1_pressed"]

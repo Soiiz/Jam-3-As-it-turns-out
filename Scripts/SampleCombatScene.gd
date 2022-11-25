@@ -6,6 +6,7 @@ onready var myButton : Button = get_node("Button")
 onready var myAnimator : AnimationPlayer = get_node("AnimationPlayer")
 onready var myPlayerCharacter : ControllableCharacter = get_node("PlayerCharacter")
 onready var myBulletHellManager = get_node("BulletHell/BulletManager");
+onready var myWallAnimator : AnimationPlayer = get_node("BulletHellAnimator")
 
 var currentState = "wingman1" #wingman1 -> wingman2 -> player -> exeuctingQueue -> enemyAction -> ... repeat
 var actionQueue = []
@@ -39,11 +40,13 @@ func next_phase() -> void:
 func enemyActionStart() -> void:
 	myBulletHellManager.firingEnabled = true;
 	myPlayerCharacter.setInputAllowed(true);
+	myWallAnimator.play("WallsMoveIn");
 	
 func enemyActionEnd()->void:
-	myPlayerCharacter.tweenTo(Vector2(10,10),1);
+	myPlayerCharacter.tweenTo(Vector2(get_viewport().size.x / 2, get_viewport().size.y / 2 ), 1.0);
 	myBulletHellManager.firingEnabled = false;
 	myPlayerCharacter.setInputAllowed(false);
+	myWallAnimator.play_backwards("WallsMoveIn")
 	
 	
 func add_action(_toAdd):
