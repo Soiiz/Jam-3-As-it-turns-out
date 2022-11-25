@@ -1,8 +1,10 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Scripts/SampleCombatScene.gd" type="Script" id=1]
 [ext_resource path="res://Prefabs/PlayerCharacter.tscn" type="PackedScene" id=2]
 [ext_resource path="res://misc resources/ResetTurn.tres" type="Animation" id=3]
+[ext_resource path="res://Scenes/BulletHell.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scripts/OptionsScript.gd" type="Script" id=5]
 
 [sub_resource type="Animation" id=1]
 length = 0.001
@@ -76,6 +78,8 @@ margin_bottom = 67.0
 
 [node name="PlayerCharacter" parent="." instance=ExtResource( 2 )]
 position = Vector2( 455, 263 )
+maxSpeed = 400
+acceleration = 10000
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 reset_on_save = false
@@ -86,32 +90,37 @@ anims/Wingman2->Player = SubResource( 3 )
 
 [node name="Options" type="Node2D" parent="."]
 position = Vector2( 480, 601 )
+rotation = 1.5708
+script = ExtResource( 5 )
 
 [node name="Wingman1Options" type="Node2D" parent="Options"]
 position = Vector2( -100, 0 )
 rotation = 4.71239
 
-[node name="Button" type="Button" parent="Options/Wingman1Options"]
+[node name="W1O1" type="Button" parent="Options/Wingman1Options"]
 margin_right = 69.0
 margin_bottom = 28.0
+text = "VibeCheck"
 __meta__ = {
 "_edit_use_anchors_": true
 }
 
-[node name="Button2" type="Button" parent="Options/Wingman1Options"]
+[node name="W1O2" type="Button" parent="Options/Wingman1Options"]
 margin_left = 2.0
 margin_top = 29.0
 margin_right = 75.0
 margin_bottom = 57.0
+text = "Rizz"
 __meta__ = {
 "_edit_use_anchors_": true
 }
 
-[node name="Button3" type="Button" parent="Options/Wingman1Options"]
+[node name="W1O3" type="Button" parent="Options/Wingman1Options"]
 margin_left = 2.0
 margin_top = 58.0
 margin_right = 73.0
 margin_bottom = 88.0
+text = "Soda"
 __meta__ = {
 "_edit_use_anchors_": true
 }
@@ -119,27 +128,30 @@ __meta__ = {
 [node name="Wingman2Options" type="Node2D" parent="Options"]
 position = Vector2( 0, -100 )
 
-[node name="Button" type="Button" parent="Options/Wingman2Options"]
+[node name="W2O1" type="Button" parent="Options/Wingman2Options"]
 margin_right = 69.0
 margin_bottom = 28.0
+text = "GoodRumor"
 __meta__ = {
 "_edit_use_anchors_": true
 }
 
-[node name="Button2" type="Button" parent="Options/Wingman2Options"]
+[node name="W202" type="Button" parent="Options/Wingman2Options"]
 margin_left = 2.0
 margin_top = 29.0
 margin_right = 75.0
 margin_bottom = 57.0
+text = "Console"
 __meta__ = {
 "_edit_use_anchors_": true
 }
 
-[node name="Button3" type="Button" parent="Options/Wingman2Options"]
+[node name="W203" type="Button" parent="Options/Wingman2Options"]
 margin_left = 2.0
 margin_top = 58.0
 margin_right = 73.0
 margin_bottom = 88.0
+text = "Protect"
 __meta__ = {
 "_edit_use_anchors_": true
 }
@@ -148,31 +160,50 @@ __meta__ = {
 position = Vector2( 100, 0 )
 rotation = 1.5708
 
-[node name="Button" type="Button" parent="Options/PlayerOptions"]
+[node name="Player1" type="Button" parent="Options/PlayerOptions"]
 margin_left = 0.526672
 margin_top = -1.04321
 margin_right = 69.5267
 margin_bottom = 26.9568
+text = "Compliment"
 __meta__ = {
 "_edit_use_anchors_": true
 }
 
-[node name="Button2" type="Button" parent="Options/PlayerOptions"]
+[node name="Player2" type="Button" parent="Options/PlayerOptions"]
 margin_left = 2.0
 margin_top = 29.0
 margin_right = 75.0
 margin_bottom = 57.0
+text = "Flirt"
 __meta__ = {
 "_edit_use_anchors_": true
 }
 
-[node name="Button3" type="Button" parent="Options/PlayerOptions"]
+[node name="Player3" type="Button" parent="Options/PlayerOptions"]
 margin_left = 2.0
 margin_top = 58.0
 margin_right = 73.0
 margin_bottom = 88.0
+text = "Gift"
 __meta__ = {
 "_edit_use_anchors_": true
 }
 
+[node name="BulletHell" parent="." instance=ExtResource( 4 )]
+
+[node name="BulletManager" parent="BulletHell" index="0"]
+playerPath = NodePath("../../PlayerCharacter")
+
 [connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]
+[connection signal="pressed" from="Options/Wingman1Options/W1O1" to="Options" method="_on_W1O1_pressed"]
+[connection signal="pressed" from="Options/Wingman1Options/W1O2" to="Options" method="_on_W1O2_pressed"]
+[connection signal="pressed" from="Options/Wingman1Options/W1O3" to="Options" method="_on_W1O3_pressed"]
+[connection signal="pressed" from="Options/Wingman2Options/W2O1" to="Options" method="_on_W2O1_pressed"]
+[connection signal="pressed" from="Options/Wingman2Options/W202" to="Options" method="_on_W202_pressed"]
+[connection signal="pressed" from="Options/Wingman2Options/W203" to="Options" method="_on_W203_pressed"]
+[connection signal="pressed" from="Options/PlayerOptions/Player1" to="Options" method="_on_Player1_pressed"]
+[connection signal="pressed" from="Options/PlayerOptions/Player2" to="Options" method="_on_Player2_pressed"]
+[connection signal="pressed" from="Options/PlayerOptions/Player3" to="Options" method="_on_Player3_pressed"]
+
+[editable path="BulletHell"]
