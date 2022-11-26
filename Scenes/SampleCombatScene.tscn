@@ -164,7 +164,7 @@ reset_on_save = false
 anims/SceneAnimations = ExtResource( 3 )
 anims/Wingman1->2 = SubResource( 2 )
 anims/Wingman2->Player = SubResource( 3 )
-blend_times = [ "RESET", "SceneAnimations", 1.0, "RESET", "Wingman1->2", 1.0, "RESET", "Wingman2->Player", 1.0, "SceneAnimations", "SceneAnimations", 1.0, "SceneAnimations", "Wingman1->2", 1.0, "SceneAnimations", "Wingman2->Player", 1.0 ]
+blend_times = [ "SceneAnimations", "SceneAnimations", 1.0, "SceneAnimations", "Wingman1->2", 1.0, "SceneAnimations", "Wingman2->Player", 1.0 ]
 
 [node name="BulletHellAnimator" type="AnimationPlayer" parent="."]
 root_node = NodePath("../BulletHellWalls")

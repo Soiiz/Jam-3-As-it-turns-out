@@ -1,5 +1,6 @@
 extends Node2D
 
+export (float) var timeBetweenActions = .4;
 
 onready var myTextLabel : RichTextLabel = get_node("DebugText")
 onready var myButton : Button = get_node("Button")
@@ -10,6 +11,7 @@ onready var myWallAnimator : AnimationPlayer = get_node("BulletHellAnimator")
 
 var currentState = "wingman1" #wingman1 -> wingman2 -> player -> exeuctingQueue -> enemyAction -> ... repeat
 var actionQueue = []
+
 
 func _ready() -> void:
 	myAnimator.play("SceneAnimations");
@@ -26,6 +28,7 @@ func next_phase() -> void:
 			myAnimator.play("Wingman2->Player");
 		"player":
 			currentState = "exeuctingQueue"
+			executeQueue();
 		"exeuctingQueue":
 			currentState = "enemyAction"
 			enemyActionStart()
@@ -35,6 +38,24 @@ func next_phase() -> void:
 			enemyActionEnd()
 			
 	myTextLabel.text = String(currentState) + "\n" + String(actionQueue);
+	
+	
+func executeQueue():
+	for action in actionQueue:
+		var currAction = actionQueue.front()
+		#match actions to function calls
+		match currAction:
+			"VibeCheck": action_vibecheck()
+			"Rizz" : action_rizz()
+			"Soda" : action_soda()
+			"GoodRumor" : action_rumor()
+			"Console" : action_console()
+			"Protect" : action_protect()
+			"Compliment" : action_compliment()
+			"Flirt" : action_flirt()
+			"Gift" : action_gift()
+		yield(get_tree().create_timer(timeBetweenActions),"timeout");
+	next_phase()
 	
 	
 func enemyActionStart() -> void:
@@ -55,3 +76,26 @@ func add_action(_toAdd):
 func _on_Button_pressed() -> void:
 	next_phase()
 	pass # Replace with function body.
+	
+#need implementing
+#wingman1
+func action_vibecheck():
+	pass
+func action_rizz():
+	pass
+func action_soda():
+	pass
+#wingman2
+func action_rumor():
+	pass
+func action_console():
+	pass
+func action_protect():
+	pass
+#player
+func action_compliment():
+	pass
+func action_flirt():
+	pass
+func action_gift():
+	pass
