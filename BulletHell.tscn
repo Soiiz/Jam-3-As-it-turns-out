@@ -22,6 +22,7 @@ position = Vector2( 512, 300 )
 scale = Vector2( 1, 1.01909 )
 collision/safe_margin = 0.001
 script = ExtResource( 2 )
+shield = 20
 invun_frames = 0.1
 
 [node name="Sprite" type="Sprite" parent="Player"]
