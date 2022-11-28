@@ -1,12 +1,14 @@
 extends KinematicBody2D
 
 export (int) var speed = 200
+export (int) var hp = 100 # subject to implementation change as values need to be passed around
+export (int) var shield = 10 # subject to value change
 
 var velocity = Vector2()
-var hp = 100 # subject to implementation change as values need to be passed around
-var shield = 10 # subject to value change
+
 onready var sprite = $Sprite
 onready var shieldObj = $Shield
+
 # delay for when player can take damage again
 export (float) var invun_frames = 10
 var invun_timer = 0
