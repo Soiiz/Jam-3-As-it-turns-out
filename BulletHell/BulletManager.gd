@@ -27,7 +27,10 @@ onready var targetPlayer = get_node(playerPath)
 # [[[letter, position, direction], [letter, position, direction]...]]
 var queue = [] 
 # words used as bullets
-var word_list = ["Cringe", "Gamer", "Nerd", "Hanzo Main", "Smelly"]
+var word_list = ["Cringe", "Gamer", "Nerd", "Hanzo Main", "Smelly", "Baka", 
+				"Shorty", "Slow", "Hardheaded", "Jerk", "Dumb", "Loser", 
+                "Weeb", "Trash", "Noob", "Lame", "Weak", "Boring", "Stupid",
+                "Bully"]
 
 
 # Called when the node enters the scene tree for the first time.
