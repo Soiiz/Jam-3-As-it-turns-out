@@ -21,11 +21,12 @@ func set_letter(new_letter):
 	get_node("Label").text = letter
 
 func on_body_entered(body):
+	print(body.name)
 	if body.name == "Player":
 		print("Hit")
 		body.take_damage(1)
 		queue_free()
 	if body is ControllableCharacter:
 		body.take_damage(20)
-		pass
+		queue_free()
 
