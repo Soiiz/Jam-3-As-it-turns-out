@@ -100,7 +100,6 @@ func action_rumor():
 func action_console():
 	pass
 func action_protect():
-	print("protect")
 	myBulletHell.shield = shieldHP
 #player
 func action_compliment():
