@@ -1,7 +1,6 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Scripts/SampleCombatScene.gd" type="Script" id=1]
-[ext_resource path="res://Prefabs/PlayerCharacter.tscn" type="PackedScene" id=2]
 [ext_resource path="res://misc resources/ResetTurn.tres" type="Animation" id=3]
 [ext_resource path="res://Scenes/BulletHell.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scripts/OptionsScript.gd" type="Script" id=5]
@@ -145,6 +144,8 @@ tracks/3/keys = {
 
 [node name="SampleScene" type="Node2D"]
 script = ExtResource( 1 )
+playerSpeed = 200
+sodaSpeed = 1000
 
 [node name="Player" parent="." instance=ExtResource( 8 )]
 
@@ -158,11 +159,6 @@ margin_left = 312.0
 margin_top = -6.0
 margin_right = 415.0
 margin_bottom = 67.0
-
-[node name="PlayerCharacter" parent="." instance=ExtResource( 2 )]
-position = Vector2( 455, 263 )
-maxSpeed = 400
-acceleration = 10000
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 reset_on_save = false
@@ -199,11 +195,6 @@ shape = SubResource( 6 )
 position = Vector2( 485, 620 )
 scale = Vector2( 25, 1 )
 shape = SubResource( 6 )
-
-[node name="BulletHell" parent="." instance=ExtResource( 4 )]
-
-[node name="BulletManager" parent="BulletHell" index="0"]
-playerPath = NodePath("../../PlayerCharacter")
 
 [node name="Options" type="Node2D" parent="."]
 position = Vector2( 480, 601 )
@@ -320,11 +311,7 @@ __meta__ = {
 "_edit_use_anchors_": true
 }
 
-[node name="Date" type="Node2D" parent="."]
-position = Vector2( 475, 89 )
-
-[node name="Sprite" type="Sprite" parent="Date"]
-texture = ExtResource( 6 )
+[node name="BulletHell" parent="." instance=ExtResource( 4 )]
 
 [connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]
 [connection signal="pressed" from="Options/Wingman1Options/W1O1" to="Options" method="_on_W1O1_pressed"]
@@ -336,5 +323,3 @@ texture = ExtResource( 6 )
 [connection signal="pressed" from="Options/PlayerOptions/Player1" to="Options" method="_on_Player1_pressed"]
 [connection signal="pressed" from="Options/PlayerOptions/Player2" to="Options" method="_on_Player2_pressed"]
 [connection signal="pressed" from="Options/PlayerOptions/Player3" to="Options" method="_on_Player3_pressed"]
-
-[editable path="BulletHell"]
