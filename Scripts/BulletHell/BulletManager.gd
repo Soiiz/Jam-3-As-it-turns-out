@@ -24,6 +24,7 @@ export (int) var bullet_damage = 10
 var firingEnabled = true;
 
 onready var targetPlayer = $Player
+onready var background = $Background
 # container for bullets
 onready var bullets = $Bullets
 
@@ -148,10 +149,13 @@ func hide():
 		bullet.hide()
 		bullet.queue_free()
 	targetPlayer.hide()
+	background.hide()
+
 
 func show():
 	firingEnabled = true
 	targetPlayer.show()
+	background.show()
 
 func set_playerSpeed(speed: int):
 	targetPlayer.speed = speed

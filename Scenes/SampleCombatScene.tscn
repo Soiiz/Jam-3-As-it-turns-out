@@ -294,6 +294,10 @@ __meta__ = {
 }
 
 [node name="BulletHell" parent="." instance=ExtResource( 4 )]
+mode = 0
+bullet_delay = 0.2
+word_delay = 1.5
+bullet_damage = 10
 
 [connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]
 [connection signal="pressed" from="Options/Wingman1Options/W1O1" to="Options" method="_on_W1O1_pressed"]

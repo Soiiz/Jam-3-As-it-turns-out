@@ -89,22 +89,22 @@ func _on_Button_pressed() -> void:
 #need implementing
 #wingman1
 func action_vibecheck():
-	pass
+	print("vibecheck")
 func action_rizz():
-	pass
+	print("rizz")
 func action_soda():
 	myBulletHell.player_speed = sodaSpeed
 #wingman2
 func action_rumor():
-	pass
+	print("rumor")
 func action_console():
-	pass
+	print("console")
 func action_protect():
 	myBulletHell.shield = shieldHP
 #player
 func action_compliment():
-	pass
+	print("compliment")
 func action_flirt():
-	pass
+	print("flirt")
 func action_gift():
-	pass
+	print("gift")
