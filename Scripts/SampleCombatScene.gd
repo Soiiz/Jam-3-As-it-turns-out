@@ -9,8 +9,29 @@ onready var myPlayerCharacter : ControllableCharacter = get_node("PlayerCharacte
 onready var myBulletHellManager = get_node("BulletHell/BulletManager");
 onready var myWallAnimator : AnimationPlayer = get_node("BulletHellAnimator")
 
+var myHealth := 100;
+
+
+var rizzActive := false;
+
+var opponentHealth := 0; # want to get to 100
+var opponent_current_want = "Gift" #"Compliment" "Gift" "Flirt"
+
+func change_want()->void:
+	var temp = rand_range(1,3)
+	match temp:
+		1 : opponent_current_want = "Gift";
+		2 : opponent_current_want = "Compliment";
+		3 : opponent_current_want = "Flirt"; 
+
+var turnCounter = 1;
+
+
+
+
 var currentState = "wingman1" #wingman1 -> wingman2 -> player -> exeuctingQueue -> enemyAction -> ... repeat
 var actionQueue = []
+
 
 
 func _ready() -> void:
@@ -36,6 +57,7 @@ func next_phase() -> void:
 			currentState = "wingman1"
 			myAnimator.play("SceneAnimations");
 			enemyActionEnd()
+			turnCounter += 1;
 			
 	myTextLabel.text = String(currentState) + "\n" + String(actionQueue);
 	
@@ -68,6 +90,7 @@ func enemyActionEnd()->void:
 	myBulletHellManager.firingEnabled = false;
 	myPlayerCharacter.setInputAllowed(false);
 	myWallAnimator.play_backwards("WallsMoveIn")
+	rizzActive = false;
 	
 	
 func add_action(_toAdd):
@@ -80,22 +103,45 @@ func _on_Button_pressed() -> void:
 #need implementing
 #wingman1
 func action_vibecheck():
+	#dialogue pop up showing that current thing
+	print(opponent_current_want);
 	pass
 func action_rizz():
+	rizzActive = true;
 	pass
 func action_soda():
 	pass
 #wingman2
 func action_rumor():
+	opponentHealth += 3;
 	pass
 func action_console():
+	myHealth += 10
+	if myHealth > 100:
+		myHealth = 100;
 	pass
 func action_protect():
+	#fill in
 	pass
 #player
 func action_compliment():
+	if opponent_current_want == "Compliment": #"Compliment" "Gift" "Flirt"
+		opponentHealth += 3;
+	opponentHealth += 2
+	if rizzActive:
+		opponentHealth += 4
 	pass
 func action_flirt():
+	if opponent_current_want == "Flirt": #"Compliment" "Gift" "Flirt"
+		opponentHealth += 3;
+	opponentHealth += 2
+	if rizzActive:
+		opponentHealth += 4
 	pass
 func action_gift():
+	if opponent_current_want == "Gift": #"Compliment" "Gift" "Flirt"
+		opponentHealth += 3;
+	opponentHealth += 2
+	if rizzActive:
+		opponentHealth += 4
 	pass
