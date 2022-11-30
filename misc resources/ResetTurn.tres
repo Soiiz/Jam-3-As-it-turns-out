@@ -13,14 +13,3 @@ tracks/0/keys = {
 "update": 0,
 "values": [ -90.0, 90.0 ]
 }
-tracks/1/type = "method"
-tracks/1/path = NodePath("PlayerCharacter")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray(  ),
-"transitions": PoolRealArray(  ),
-"values": [  ]
-}

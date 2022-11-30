@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/pixelheart.png-866bb41045f35ed952c3644fa43721fe.stex"
+path="res://.import/pixelheart.png-5bcdccf2a5726e9d937ca95aed2da667.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://BulletHell/pixelheart.png"
-dest_files=[ "res://.import/pixelheart.png-866bb41045f35ed952c3644fa43721fe.stex" ]
+source_file="res://Assets/pixelheart.png"
+dest_files=[ "res://.import/pixelheart.png-5bcdccf2a5726e9d937ca95aed2da667.stex" ]
 
 [params]
 

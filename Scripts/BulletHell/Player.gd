@@ -1,18 +1,22 @@
 extends KinematicBody2D
 
+class_name ControllableCharacter
+
 export (int) var speed = 200
 export (int) var hp = 100 # subject to implementation change as values need to be passed around
 export (int) var shield = 10 # subject to value change
+
+var inputAllowed := true setget setInputAllowed, getInputAllowed;
 
 var velocity = Vector2()
 
 onready var sprite = $Sprite
 onready var shieldObj = $Shield
+onready var tweenObj = $Tween
 
 # delay for when player can take damage again
 export (float) var invun_frames = 10
 var invun_timer = 0
-
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -20,6 +24,10 @@ func _ready():
 
 func get_input():
 	velocity = Vector2()
+	# dont update velocity if input is not allowed
+	if not inputAllowed:
+		return
+
 	if Input.is_action_pressed("right"):
 		velocity.x += 1
 	if Input.is_action_pressed("left"):
@@ -29,6 +37,11 @@ func get_input():
 	if Input.is_action_pressed("up"):
 		velocity.y -= 1
 	velocity = velocity.normalized() * speed
+
+func tweenTo(_position : Vector2, time : float) -> void:
+	tweenObj.interpolate_property(self, "position",self.position, _position, time,Tween.TRANS_LINEAR,Tween.EASE_IN);
+	tweenObj.start();
+	pass
 
 func _physics_process(delta):
 	get_input()
@@ -52,7 +65,6 @@ func _physics_process(delta):
 func take_damage(damage):
 	# skip damage if player still invun
 	if invun_timer > 0:
-		print("skipped damage")
 		return
 	# set timer if damage is taken
 	invun_timer = invun_frames
@@ -64,8 +76,11 @@ func take_damage(damage):
 		shield = 0
 	else:
 		hp -= damage
-	print("hp: " + str(hp))
-	print("shield: " + str(shield))
+	print("player hp: ", hp)
+	print("player shield: ", shield)
 
-	
+func setInputAllowed(value : bool):
+	inputAllowed = value;
 
+func getInputAllowed():
+	return inputAllowed
