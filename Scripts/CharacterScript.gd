@@ -22,6 +22,7 @@ func tweenTo(_position : Vector2, time : float) -> void:
 	myTween.interpolate_property(self, "position",self.position, _position, time,Tween.TRANS_LINEAR,Tween.EASE_IN);
 	myTween.start();
 	pass
+	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
 	if (!inputAllowed):

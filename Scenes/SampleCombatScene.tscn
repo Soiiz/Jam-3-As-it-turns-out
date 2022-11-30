@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Scripts/SampleCombatScene.gd" type="Script" id=1]
 [ext_resource path="res://Prefabs/PlayerCharacter.tscn" type="PackedScene" id=2]
@@ -6,6 +6,8 @@
 [ext_resource path="res://Scenes/BulletHell.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scripts/OptionsScript.gd" type="Script" id=5]
 [ext_resource path="res://icon.png" type="Texture" id=6]
+[ext_resource path="res://UITheme/kenneyUI-blue.tres" type="Theme" id=7]
+[ext_resource path="res://Prefabs/Player.tscn" type="PackedScene" id=8]
 
 [sub_resource type="Animation" id=2]
 resource_name = "Wingman1->2"
@@ -144,6 +146,8 @@ tracks/3/keys = {
 [node name="SampleScene" type="Node2D"]
 script = ExtResource( 1 )
 
+[node name="Player" parent="." instance=ExtResource( 8 )]
+
 [node name="DebugText" type="RichTextLabel" parent="."]
 margin_right = 276.0
 margin_bottom = 77.0
@@ -203,7 +207,7 @@ playerPath = NodePath("../../PlayerCharacter")
 
 [node name="Options" type="Node2D" parent="."]
 position = Vector2( 480, 601 )
-rotation = 1.5708
+rotation = -1.5708
 script = ExtResource( 5 )
 
 [node name="Wingman1Options" type="Node2D" parent="Options"]
@@ -211,28 +215,33 @@ position = Vector2( -100, 0 )
 rotation = 4.71239
 
 [node name="W1O1" type="Button" parent="Options/Wingman1Options"]
-margin_right = 69.0
-margin_bottom = 28.0
+margin_left = 5.0
+margin_top = -22.0
+margin_right = 155.0
+margin_bottom = 20.251
+theme = ExtResource( 7 )
 text = "VibeCheck"
 __meta__ = {
 "_edit_use_anchors_": true
 }
 
 [node name="W1O2" type="Button" parent="Options/Wingman1Options"]
-margin_left = 2.0
-margin_top = 29.0
-margin_right = 75.0
-margin_bottom = 57.0
+margin_left = 5.0
+margin_top = 19.0
+margin_right = 155.0
+margin_bottom = 61.251
+theme = ExtResource( 7 )
 text = "Rizz"
 __meta__ = {
 "_edit_use_anchors_": true
 }
 
 [node name="W1O3" type="Button" parent="Options/Wingman1Options"]
-margin_left = 2.0
+margin_left = 5.00006
 margin_top = 58.0
-margin_right = 73.0
-margin_bottom = 88.0
+margin_right = 155.0
+margin_bottom = 100.251
+theme = ExtResource( 7 )
 text = "Soda"
 __meta__ = {
 "_edit_use_anchors_": true
@@ -242,8 +251,11 @@ __meta__ = {
 position = Vector2( 0, -100 )
 
 [node name="W2O1" type="Button" parent="Options/Wingman2Options"]
-margin_right = 69.0
-margin_bottom = 28.0
+margin_left = 1.0
+margin_top = -25.0
+margin_right = 151.0
+margin_bottom = 18.0
+theme = ExtResource( 7 )
 text = "GoodRumor"
 __meta__ = {
 "_edit_use_anchors_": true
@@ -251,9 +263,10 @@ __meta__ = {
 
 [node name="W202" type="Button" parent="Options/Wingman2Options"]
 margin_left = 2.0
-margin_top = 29.0
-margin_right = 75.0
-margin_bottom = 57.0
+margin_top = 18.0
+margin_right = 152.0
+margin_bottom = 60.251
+theme = ExtResource( 7 )
 text = "Console"
 __meta__ = {
 "_edit_use_anchors_": true
@@ -262,8 +275,9 @@ __meta__ = {
 [node name="W203" type="Button" parent="Options/Wingman2Options"]
 margin_left = 2.0
 margin_top = 58.0
-margin_right = 73.0
-margin_bottom = 88.0
+margin_right = 152.0
+margin_bottom = 100.251
+theme = ExtResource( 7 )
 text = "Protect"
 __meta__ = {
 "_edit_use_anchors_": true
@@ -275,9 +289,10 @@ rotation = 1.5708
 
 [node name="Player1" type="Button" parent="Options/PlayerOptions"]
 margin_left = 0.526672
-margin_top = -1.04321
-margin_right = 69.5267
-margin_bottom = 26.9568
+margin_top = -12.0
+margin_right = 151.851
+margin_bottom = 30.251
+theme = ExtResource( 7 )
 text = "Compliment"
 __meta__ = {
 "_edit_use_anchors_": true
@@ -286,8 +301,9 @@ __meta__ = {
 [node name="Player2" type="Button" parent="Options/PlayerOptions"]
 margin_left = 2.0
 margin_top = 29.0
-margin_right = 75.0
-margin_bottom = 57.0
+margin_right = 152.0
+margin_bottom = 71.251
+theme = ExtResource( 7 )
 text = "Flirt"
 __meta__ = {
 "_edit_use_anchors_": true
@@ -295,15 +311,17 @@ __meta__ = {
 
 [node name="Player3" type="Button" parent="Options/PlayerOptions"]
 margin_left = 2.0
-margin_top = 58.0
-margin_right = 73.0
-margin_bottom = 88.0
+margin_top = 72.0
+margin_right = 152.0
+margin_bottom = 114.251
+theme = ExtResource( 7 )
 text = "Gift"
 __meta__ = {
 "_edit_use_anchors_": true
 }
 
 [node name="Date" type="Node2D" parent="."]
+position = Vector2( 475, 89 )
 
 [node name="Sprite" type="Sprite" parent="Date"]
 texture = ExtResource( 6 )
