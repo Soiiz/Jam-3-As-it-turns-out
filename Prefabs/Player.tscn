@@ -1,16 +1,13 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://Scripts/BulletHell/Player.gd" type="Script" id=1]
-[ext_resource path="res://Assets/pixelheart.png" type="Texture" id=2]
-[ext_resource path="res://Assets/shield.png" type="Texture" id=3]
+[ext_resource path="res://BulletHell/Player.gd" type="Script" id=1]
+[ext_resource path="res://BulletHell/pixelheart.png" type="Texture" id=2]
 
 [node name="Player" type="KinematicBody2D"]
 position = Vector2( 512, 300 )
 scale = Vector2( 1, 1.01909 )
 collision/safe_margin = 0.001
 script = ExtResource( 1 )
-shield = 20
-invun_frames = 0.1
 
 [node name="Sprite" type="Sprite" parent="."]
 scale = Vector2( 2, 2 )
@@ -18,9 +15,3 @@ texture = ExtResource( 2 )
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 polygon = PoolVector2Array( 0, 12, 14, -2, 14, -8, 10, -12, -10, -12, -14, -8, -14, -2 )
-
-[node name="Shield" type="Sprite" parent="."]
-scale = Vector2( 2, 2 )
-texture = ExtResource( 3 )
-
-[node name="Tween" type="Tween" parent="."]

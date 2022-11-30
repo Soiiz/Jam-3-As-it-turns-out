@@ -1,10 +1,8 @@
 extends Node
 
-const bullet = preload("res://prefabs/BulletHell/Bullet.tscn")
+const bullet = preload("res://BulletHell/Bullet.tscn")
 
-var bullet_speed = 100
-var player_speed = 100 setget set_playerSpeed
-var shield = 0 setget set_playerShield
+export (int) var speed = 100
 
 #mode of bullet hell
 #0: all firing modes
@@ -19,22 +17,18 @@ export (float) var bullet_delay = .2
 #timer for word spawn rate
 var word_timer = 0
 export (float) var word_delay = 1.5
-export (int) var bullet_damage = 10
 
 var firingEnabled = true;
 
-onready var targetPlayer = $Player
-# container for bullets
-onready var bullets = $Bullets
+export (NodePath) var playerPath;
+onready var targetPlayer = get_node(playerPath)
 
 # queue for words includes letter position and direction
 # [[[letter, position, direction], [letter, position, direction]...]]
 var queue = [] 
 # words used as bullets
-var word_list = ["Cringe", "Gamer", "Nerd", "Hanzo Main", "Smelly", "Baka", 
-				"Shorty", "Slow", "Hardheaded", "Jerk", "Dumb", "Loser", 
-				"Weeb", "Trash", "Noob", "Lame", "Weak", "Boring", "Stupid",
-				"Bully"]
+var word_list = ["Cringe", "Gamer", "Nerd", "Hanzo Main", "Smelly"]
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -45,8 +39,7 @@ func shoot(letter: String, speed : int, position : Vector2, direction: float):
 	new_bullet.velocity = Vector2(speed, 0).rotated(deg2rad(direction))
 	new_bullet.position = position
 	new_bullet.letter = letter
-	new_bullet.damage = bullet_damage
-	bullets.add_child(new_bullet)
+	get_parent().add_child(new_bullet)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -57,7 +50,7 @@ func _process(delta):
 	if timer <= 0 and queue.size() > 0:
 		for word in queue:
 			if(word[0][0] != " "):
-				shoot(word[0][0], bullet_speed, word[0][1], word[0][2])
+				shoot(word[0][0], speed, word[0][1], word[0][2])
 			word.pop_front()
 			if(word.size() == 0):
 				queue.erase(word)
@@ -131,7 +124,7 @@ func targeted_shot():
 		position += Vector2(length / (word.length() - 1), 0)
 	for bullet in letter_list:
 		var bullet_vector = bullet[1].normalized() * longest_distance
-		shoot(bullet[0], bullet_speed, player_position - bullet_vector, bullet[1].angle() * 180 / PI)
+		shoot(bullet[0], speed, player_position - bullet_vector, bullet[1].angle() * 180 / PI)
 		
 		
 #reverse string function
@@ -141,21 +134,3 @@ func reverse_string(s:String) -> String:
 	for i in range(s.length()-1, -1, -1):
 		r += s[i]
 	return r
-
-func hide():
-	firingEnabled = false
-	for bullet in bullets.get_children():
-		bullet.hide()
-		bullet.queue_free()
-	targetPlayer.hide()
-
-func show():
-	firingEnabled = true
-	targetPlayer.show()
-
-func set_playerSpeed(speed: int):
-	targetPlayer.speed = speed
-
-func set_playerShield(hp: int):
-	print("set shield")
-	targetPlayer.shield = hp

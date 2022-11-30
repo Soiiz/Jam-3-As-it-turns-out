@@ -12,7 +12,7 @@ _global_script_classes=[ {
 "base": "KinematicBody2D",
 "class": "ControllableCharacter",
 "language": "GDScript",
-"path": "res://Scripts/BulletHell/Player.gd"
+"path": "res://Scripts/CharacterScript.gd"
 } ]
 _global_script_class_icons={
 "ControllableCharacter": ""

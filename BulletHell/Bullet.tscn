@@ -1,10 +1,9 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://Scripts/BulletHell/Bullet.gd" type="Script" id=1]
-[ext_resource path="res://Assets/04b_30/SquaredanceFontV1-Regular.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://BulletHell/Bullet.gd" type="Script" id=1]
+[ext_resource path="res://BulletHell/04b_30/04B_30__.TTF" type="DynamicFontData" id=2]
 
 [sub_resource type="DynamicFont" id=2]
-size = 24
 font_data = ExtResource( 2 )
 
 [sub_resource type="RectangleShape2D" id=1]
@@ -29,5 +28,5 @@ valign = 1
 uppercase = true
 
 [node name="Hitbox" type="CollisionShape2D" parent="."]
-position = Vector2( 0, 1 )
+position = Vector2( -1, 1 )
 shape = SubResource( 1 )
