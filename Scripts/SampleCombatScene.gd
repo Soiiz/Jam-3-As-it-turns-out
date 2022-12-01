@@ -100,6 +100,7 @@ func action_soda():
 	myBulletHell.player_speed = sodaSpeed
 #wingman2
 func action_rumor():
+
 	print("rumor")
 func action_console():
 	print("console")
