@@ -1,10 +1,11 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Scripts/SampleCombatScene.gd" type="Script" id=1]
 [ext_resource path="res://Assets/UITheme/kenneyUI-blue.tres" type="Theme" id=2]
 [ext_resource path="res://misc resources/ResetTurn.tres" type="Animation" id=3]
 [ext_resource path="res://Scenes/BulletHell.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scripts/OptionsScript.gd" type="Script" id=5]
+[ext_resource path="res://Scenes/Interface.tscn" type="PackedScene" id=6]
 
 [sub_resource type="Animation" id=2]
 resource_name = "Wingman1->2"
@@ -144,6 +145,14 @@ tracks/3/keys = {
 script = ExtResource( 1 )
 playerSpeed = 200
 sodaSpeed = 1000
+
+[node name="Interface" parent="." instance=ExtResource( 6 )]
+
+[node name="HealthBar" parent="Interface" index="0"]
+margin_left = 44.0
+margin_top = 516.0
+margin_right = 332.0
+margin_bottom = 547.0
 
 [node name="DebugText" type="RichTextLabel" parent="."]
 margin_right = 276.0
@@ -311,6 +320,7 @@ __meta__ = {
 [node name="Background" parent="BulletHell" index="0"]
 visible = false
 
+[connection signal="health_changed" from="Interface" to="Interface/HealthBar" method="_on_Interface_health_changed"]
 [connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]
 [connection signal="pressed" from="Options/Wingman1Options/W1O1" to="Options" method="_on_W1O1_pressed"]
 [connection signal="pressed" from="Options/Wingman1Options/W1O2" to="Options" method="_on_W1O2_pressed"]
@@ -321,5 +331,7 @@ visible = false
 [connection signal="pressed" from="Options/PlayerOptions/Player1" to="Options" method="_on_Player1_pressed"]
 [connection signal="pressed" from="Options/PlayerOptions/Player2" to="Options" method="_on_Player2_pressed"]
 [connection signal="pressed" from="Options/PlayerOptions/Player3" to="Options" method="_on_Player3_pressed"]
+[connection signal="health_changed" from="BulletHell/Player" to="Interface" method="_on_Player_health_changed"]
 
+[editable path="Interface"]
 [editable path="BulletHell"]
