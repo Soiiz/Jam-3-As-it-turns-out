@@ -20,7 +20,9 @@ export (int) var sodaSpeed = 150
 export (int) var shieldHP = 50
 export (float) var timeInSHMUP = 3.0
 export var heal = 10
+export var interest_gain = 10
 signal heal_health(heal)
+signal enemy_rumor(interest_gain)
 func _ready() -> void:
 	myAnimator.play("SceneAnimations")
 	myBulletHell.hide()
@@ -103,6 +105,7 @@ func action_soda():
 	myBulletHell.player_speed = sodaSpeed
 #wingman2
 func action_rumor():
+	emit_signal("enemy_rumor", interest_gain)
 	print("rumor")
 func action_console():
 	emit_signal("heal_health", heal)
