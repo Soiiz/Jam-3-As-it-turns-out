@@ -8,6 +8,7 @@ onready var myAnimator : AnimationPlayer = get_node("AnimationPlayer")
 onready var myPlayerCharacter = get_node("BulletHell/Player")
 onready var myBulletHell = get_node("BulletHell")
 onready var myWallAnimator : AnimationPlayer = get_node("BulletHellAnimator")
+onready var myVibeText : Label = get_node("VibeText")
 
 var currentState = "wingman1" #wingman1 -> wingman2 -> player -> exeuctingQueue -> enemyAction -> ... repeat
 var actionQueue = []
@@ -20,7 +21,7 @@ export (int) var sodaSpeed = 150
 export (int) var shieldHP = 50
 export (float) var timeInSHMUP = 3.0
 export var heal = 10
-export var interest_gain = 10
+
 signal heal_health(heal)
 signal enemy_rumor(interest_gain)
 func _ready() -> void:
@@ -29,6 +30,17 @@ func _ready() -> void:
 	myBulletHell.shield = 0
 	myBulletHell.player_speed = playerSpeed
 	myPlayerCharacter.setInputAllowed(false)
+
+# enemy effectives 
+var turnNumber = 0
+var effectiveQueue = [ 1, 1, 1, 2, 2, 2, 3, 3, 3, 3, 3, 3]
+export var rumor_gain = 5
+export var normal_gain = 10
+export var effective_gain = 15
+export var ineffective_gain = 0
+
+# rizz variable
+var rizz = 0
 	
 func next_phase() -> void:
 	match currentState:
@@ -65,6 +77,7 @@ func executeQueue():
 			"Compliment" : action_compliment()
 			"Flirt" : action_flirt()
 			"Gift" : action_gift()
+	yield(get_tree().create_timer(5),"timeout")
 	actionQueue.clear()
 	next_phase()
 	
@@ -83,6 +96,10 @@ func enemyActionEnd()->void:
 	myBulletHell.shield = 0
 	myPlayerCharacter.setInputAllowed(false)
 	myWallAnimator.play_backwards("WallsMoveIn")
+	# set to next turn
+	turnNumber += 1
+	if rizz > 0:
+		rizz -= 1
 
 	
 	
@@ -94,27 +111,62 @@ func _on_Button_pressed() -> void:
 	pass # Replace with function body.
 	
 #need implementing
-#wingman1
+#wingman1 (done)
 func action_vibecheck():
-	
-	print("vibecheck")
+	# horrendous way to code this but im too lazy to do it properly
+	myVibeText.show()
+	myVibeText.text = "Vibe Check: Love interest will be more effective next turn with "
+	match effectiveQueue[turnNumber+1]:
+		1: myVibeText.text += "compliment"
+		2: myVibeText.text += "flirt"
+		3: myVibeText.text += "gift"
+
+	myVibeText.text += ", then "
+	match effectiveQueue[turnNumber+2]:
+		1: myVibeText.text += "compliment"
+		2: myVibeText.text += "flirt"
+		3: myVibeText.text += "gift"
+	yield(get_tree().create_timer(5),"timeout")
+	myVibeText.hide()
 func action_rizz():
-	print("rizz")
+	rizz = 2
 func action_soda():
 	myBulletHell.player_speed = sodaSpeed
-#wingman2
+#wingman2 (done)
 func action_rumor():
-	emit_signal("enemy_rumor", interest_gain)
-	print("rumor")
+	emit_signal("enemy_rumor", rumor_gain)
 func action_console():
 	emit_signal("heal_health", heal)
-	print("console")
 func action_protect():
 	myBulletHell.shield = shieldHP
-#player
+#player (done)
 func action_compliment():
-	print("compliment")
+	var multiplier = 1
+	if rizz == 1:
+		multiplier = 2
+	if effectiveQueue[turnNumber] == 1:
+		emit_signal("enemy_rumor", effective_gain * multiplier)
+	elif effectiveQueue[turnNumber] == 2:
+		emit_signal("enemy_rumor", ineffective_gain * multiplier)
+	else:
+		emit_signal("enemy_rumor", normal_gain * multiplier)
 func action_flirt():
-	print("flirt")
+	var multiplier = 1
+	if rizz == 1:
+		multiplier = 2
+	if effectiveQueue[turnNumber] == 1:
+		emit_signal("enemy_rumor", normal_gain * multiplier)
+	elif effectiveQueue[turnNumber] == 2:
+		emit_signal("enemy_rumor", effective_gain * multiplier)
+	else:
+		emit_signal("enemy_rumor", normal_gain * multiplier)
 func action_gift():
-	print("gift")
+	var multiplier = 1
+	if rizz == 1:
+		multiplier = 2
+	if effectiveQueue[turnNumber] == 1:
+		emit_signal("enemy_rumor", ineffective_gain * multiplier)
+	elif effectiveQueue[turnNumber] == 2:
+		emit_signal("enemy_rumor", ineffective_gain * multiplier)
+	else:
+		emit_signal("enemy_rumor", effective_gain * multiplier)

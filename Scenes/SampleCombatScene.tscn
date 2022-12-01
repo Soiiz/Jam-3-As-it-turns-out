@@ -170,6 +170,17 @@ root_node = NodePath("")
 anims/RESET = SubResource( 4 )
 anims/WallsMoveIn = SubResource( 5 )
 
+[node name="VibeText" type="Label" parent="."]
+margin_left = 118.0
+margin_top = 129.0
+margin_right = 915.0
+margin_bottom = 465.0
+text = "
+"
+align = 1
+valign = 1
+autowrap = true
+
 [node name="Options" type="Node2D" parent="."]
 position = Vector2( 480, 601 )
 rotation = 1.5708
