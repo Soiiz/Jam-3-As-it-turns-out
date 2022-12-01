@@ -32,7 +32,7 @@ func _ready() -> void:
 
 # enemy effectives 
 var turnNumber = 0
-var effectiveQueue = [ 1, 1, 1, 2, 2, 2, 3, 3, 3, 3, 3, 3, 1, 1, 1, 2, 2, 2, 3, 3, 3, 3, 3, 3]
+var effectiveQueue = [ 1, 1, 1, 2, 2, 2, 3, 3, 3] # premade queue of effective types
 export var rumor_gain = 5
 export var normal_gain = 10
 export var effective_gain = 15
@@ -100,6 +100,8 @@ func enemyActionEnd()->void:
 	if rizzAction == true:
 		rizzAction = false
 		rizz = 1
+	if turnNumber > 10:
+		effectiveQueue.append(randi() % 3 + 1)
 	myBulletHell.set_difficulty(turnNumber)
 
 func add_action(_toAdd):

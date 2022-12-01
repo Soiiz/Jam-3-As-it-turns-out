@@ -173,7 +173,7 @@ func set_difficulty(difficulty: int):
         mode = 2
     elif difficulty < 5:
         mode = 3
-    elif difficulty < 6:
+    elif difficulty >= 6:
         mode = 0
 
 func set_playerSpeed(speed: int):

@@ -5,7 +5,7 @@
 
 [node name="BulletHell" type="Node"]
 script = ExtResource( 1 )
-difficulty = 24
+difficulty = 1
 
 [node name="Background" type="ColorRect" parent="."]
 margin_right = 1920.0
