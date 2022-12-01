@@ -142,9 +142,11 @@ tracks/3/keys = {
 
 [node name="SampleScene" type="Node2D"]
 script = ExtResource( 1 )
-playerSpeed = 200
-sodaSpeed = 400
-timeInSHMUP = 15.0
+playerSpeed = 150
+sodaSpeed = 300
+shieldHP = 25
+timeInSHMUP = 20.0
+heal = 15
 
 [node name="Enemy" parent="." instance=ExtResource( 7 )]
 

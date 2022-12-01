@@ -27,17 +27,19 @@ func _ready() -> void:
 	myBulletHell.hide()
 	myBulletHell.shield = 0
 	myBulletHell.player_speed = playerSpeed
+	myBulletHell.set_difficulty(0)
 	myPlayerCharacter.setInputAllowed(false)
 
 # enemy effectives 
 var turnNumber = 0
-var effectiveQueue = [ 1, 1, 1, 2, 2, 2, 3, 3, 3, 3, 3, 3]
+var effectiveQueue = [ 1, 1, 1, 2, 2, 2, 3, 3, 3, 3, 3, 3, 1, 1, 1, 2, 2, 2, 3, 3, 3, 3, 3, 3]
 export var rumor_gain = 5
 export var normal_gain = 10
 export var effective_gain = 15
 export var ineffective_gain = 0
 
 # rizz variable
+var rizzAction = false
 var rizz = 0
 	
 func next_phase() -> void:
@@ -74,7 +76,8 @@ func executeQueue():
 			"Compliment" : action_compliment()
 			"Flirt" : action_flirt()
 			"Gift" : action_gift()
-	yield(get_tree().create_timer(5),"timeout")
+	if "VibeCheck" in actionQueue:
+		yield(get_tree().create_timer(5),"timeout")
 	actionQueue.clear()
 	next_phase()
 		
@@ -94,8 +97,10 @@ func enemyActionEnd()->void:
 	myWallAnimator.play_backwards("WallsMoveIn")
 	# set to next turn
 	turnNumber += 1
-	if rizz > 0:
-		rizz -= 1
+	if rizzAction == true:
+		rizzAction = false
+		rizz = 1
+	myBulletHell.set_difficulty(turnNumber)
 
 func add_action(_toAdd):
 	actionQueue.push_back(_toAdd)
@@ -123,7 +128,7 @@ func action_vibecheck():
 	yield(get_tree().create_timer(5),"timeout")
 	myVibeText.hide()
 func action_rizz():
-	rizz = 2
+	rizzAction = true
 func action_soda():
 	myBulletHell.player_speed = sodaSpeed
 #wingman2 (done)
@@ -137,6 +142,7 @@ func action_protect():
 func action_compliment():
 	var multiplier = 1
 	if rizz == 1:
+		rizz = 0
 		multiplier = 2
 	if effectiveQueue[turnNumber] == 1:
 		emit_signal("enemy_rumor", effective_gain * multiplier)
@@ -147,6 +153,7 @@ func action_compliment():
 func action_flirt():
 	var multiplier = 1
 	if rizz == 1:
+		rizz = 0
 		multiplier = 2
 	if effectiveQueue[turnNumber] == 1:
 		emit_signal("enemy_rumor", ineffective_gain * multiplier)
@@ -157,6 +164,7 @@ func action_flirt():
 func action_gift():
 	var multiplier = 1
 	if rizz == 1:
+		rizz = 0
 		multiplier = 2
 	if effectiveQueue[turnNumber] == 1:
 		emit_signal("enemy_rumor", ineffective_gain * multiplier)

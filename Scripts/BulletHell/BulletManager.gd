@@ -157,6 +157,24 @@ func show():
 	targetPlayer.show()
 	background.show()
 
+func set_difficulty(difficulty: int):
+    bullet_speed = 100 + 50 * difficulty
+    bullet_delay = 0.5 - 0.05 * difficulty
+    if bullet_delay < 0.01:
+        bullet_delay = 0.01
+    word_delay = 1.2 - 0.1 * difficulty
+    if word_delay < 0.01:
+        word_delay = 0.01
+    bullet_damage = 10 + 2 * difficulty
+    if difficulty < 2:
+        mode = 1
+    elif difficulty < 4:
+        mode = 2
+    elif difficulty < 5:
+        mode = 3
+    elif difficulty < 6:
+        mode = 0
+
 func set_playerSpeed(speed: int):
 	targetPlayer.speed = speed
 
