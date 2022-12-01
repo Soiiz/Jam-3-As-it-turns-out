@@ -5,7 +5,7 @@ class_name ControllableCharacter
 export (int) var speed = 200
 export (int) var hp = 100 # subject to implementation change as values need to be passed around
 export (int) var shield = 10 # subject to value change
-
+signal health_changed(hp)
 var inputAllowed := true setget setInputAllowed, getInputAllowed;
 
 var velocity = Vector2()
@@ -20,6 +20,7 @@ var invun_timer = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	emit_signal("health_changed", hp)
 	pass # Replace with function body.
 
 func get_input():
@@ -76,6 +77,7 @@ func take_damage(damage):
 		shield = 0
 	else:
 		hp -= damage
+		emit_signal("health_changed", hp)
 	print("player hp: ", hp)
 	print("player shield: ", shield)
 
