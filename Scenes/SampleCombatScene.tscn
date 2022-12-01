@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Scripts/SampleCombatScene.gd" type="Script" id=1]
 [ext_resource path="res://Assets/UITheme/kenneyUI-blue.tres" type="Theme" id=2]
@@ -140,22 +140,13 @@ tracks/3/keys = {
 "values": [ Vector2( 485, 620 ), Vector2( 485, 425 ) ]
 }
 
-[sub_resource type="RectangleShape2D" id=6]
-
 [node name="SampleScene" type="Node2D"]
 script = ExtResource( 1 )
 playerSpeed = 200
-sodaSpeed = 1000
+sodaSpeed = 400
+timeInSHMUP = 15.0
 
 [node name="Enemy" parent="." instance=ExtResource( 7 )]
-
-[node name="Interface" parent="." instance=ExtResource( 6 )]
-
-[node name="HealthBar" parent="Interface" index="0"]
-margin_left = 44.0
-margin_top = 516.0
-margin_right = 332.0
-margin_bottom = 547.0
 
 [node name="DebugText" type="RichTextLabel" parent="."]
 margin_right = 276.0
@@ -175,33 +166,9 @@ anims/Wingman2->Player = SubResource( 3 )
 blend_times = [ "SceneAnimations", "SceneAnimations", 1.0, "SceneAnimations", "Wingman1->2", 1.0, "SceneAnimations", "Wingman2->Player", 1.0 ]
 
 [node name="BulletHellAnimator" type="AnimationPlayer" parent="."]
-root_node = NodePath("../BulletHellWalls")
+root_node = NodePath("")
 anims/RESET = SubResource( 4 )
 anims/WallsMoveIn = SubResource( 5 )
-
-[node name="BulletHellWalls" type="Node2D" parent="."]
-
-[node name="StaticBody2D" type="StaticBody2D" parent="BulletHellWalls"]
-
-[node name="Right" type="CollisionShape2D" parent="BulletHellWalls/StaticBody2D"]
-position = Vector2( 1050, 285 )
-scale = Vector2( 1, 15 )
-shape = SubResource( 6 )
-
-[node name="Left" type="CollisionShape2D" parent="BulletHellWalls/StaticBody2D"]
-position = Vector2( -25, 285 )
-scale = Vector2( 1, 15 )
-shape = SubResource( 6 )
-
-[node name="Top" type="CollisionShape2D" parent="BulletHellWalls/StaticBody2D"]
-position = Vector2( 475, -33 )
-scale = Vector2( 25, 1 )
-shape = SubResource( 6 )
-
-[node name="Bottom" type="CollisionShape2D" parent="BulletHellWalls/StaticBody2D"]
-position = Vector2( 485, 620 )
-scale = Vector2( 25, 1 )
-shape = SubResource( 6 )
 
 [node name="Options" type="Node2D" parent="."]
 position = Vector2( 480, 601 )
@@ -318,15 +285,24 @@ __meta__ = {
 "_edit_use_anchors_": true
 }
 
+[node name="Interface" parent="." instance=ExtResource( 6 )]
+
+[node name="HealthBar" parent="Interface" index="0"]
+margin_left = 44.0
+margin_top = 516.0
+margin_right = 332.0
+margin_bottom = 547.0
+
 [node name="BulletHell" parent="." instance=ExtResource( 4 )]
+word_delay = 1.0
 
 [node name="Background" parent="BulletHell" index="0"]
 visible = false
+light_mask = 2
 
 [connection signal="enemy_rumor" from="." to="Enemy" method="_on_SampleScene_enemy_rumor"]
 [connection signal="heal_health" from="." to="BulletHell/Player" method="_on_SampleScene_heal_health"]
 [connection signal="enemy_HP_Updated" from="Enemy" to="Interface" method="_on_Enemy_enemy_HP_Updated"]
-[connection signal="health_changed" from="Interface" to="Interface/HealthBar" method="_on_Interface_health_changed"]
 [connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]
 [connection signal="pressed" from="Options/Wingman1Options/W1O1" to="Options" method="_on_W1O1_pressed"]
 [connection signal="pressed" from="Options/Wingman1Options/W1O2" to="Options" method="_on_W1O2_pressed"]
@@ -337,6 +313,7 @@ visible = false
 [connection signal="pressed" from="Options/PlayerOptions/Player1" to="Options" method="_on_Player1_pressed"]
 [connection signal="pressed" from="Options/PlayerOptions/Player2" to="Options" method="_on_Player2_pressed"]
 [connection signal="pressed" from="Options/PlayerOptions/Player3" to="Options" method="_on_Player3_pressed"]
+[connection signal="health_changed" from="Interface" to="Interface/HealthBar" method="_on_Interface_health_changed"]
 [connection signal="health_changed" from="BulletHell/Player" to="Interface" method="_on_Player_health_changed"]
 
 [editable path="Interface"]

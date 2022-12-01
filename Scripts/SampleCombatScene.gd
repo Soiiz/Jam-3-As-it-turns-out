@@ -54,9 +54,8 @@ func next_phase() -> void:
 	
 func executeQueue():
 	for action in actionQueue:
-		var currAction = actionQueue.pop_front()
 		#match actions to function calls
-		match currAction:
+		match action:
 			"VibeCheck": action_vibecheck()
 			"Rizz" : action_rizz()
 			"Soda" : action_soda()
@@ -66,7 +65,7 @@ func executeQueue():
 			"Compliment" : action_compliment()
 			"Flirt" : action_flirt()
 			"Gift" : action_gift()
-		yield(get_tree().create_timer(timeBetweenActions),"timeout")
+	actionQueue.clear()
 	next_phase()
 	
 	
