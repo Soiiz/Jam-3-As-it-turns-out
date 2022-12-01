@@ -6,7 +6,7 @@
 [ext_resource path="res://Scenes/BulletHell.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scripts/OptionsScript.gd" type="Script" id=5]
 [ext_resource path="res://Scenes/Interface.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Enemy.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Scenes/Enemy.tscn" type="PackedScene" id=7]
 
 [sub_resource type="Animation" id=2]
 resource_name = "Wingman1->2"
@@ -325,6 +325,7 @@ visible = false
 
 [connection signal="enemy_rumor" from="." to="Enemy" method="_on_SampleScene_enemy_rumor"]
 [connection signal="heal_health" from="." to="BulletHell/Player" method="_on_SampleScene_heal_health"]
+[connection signal="enemy_HP_Updated" from="Enemy" to="Interface" method="_on_Enemy_enemy_HP_Updated"]
 [connection signal="health_changed" from="Interface" to="Interface/HealthBar" method="_on_Interface_health_changed"]
 [connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]
 [connection signal="pressed" from="Options/Wingman1Options/W1O1" to="Options" method="_on_W1O1_pressed"]

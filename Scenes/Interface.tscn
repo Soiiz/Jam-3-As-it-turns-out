@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Scripts/Interface.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/HealthBar.gd" type="Script" id=2]
+[ext_resource path="res://Scripts/EnemyHealthBar.gd" type="Script" id=3]
 
 [node name="Interface" type="Control"]
 anchor_right = 1.0
@@ -14,3 +15,12 @@ margin_top = 489.0
 margin_right = 337.0
 margin_bottom = 520.0
 script = ExtResource( 2 )
+
+[node name="EnemyHealthBar" type="ProgressBar" parent="."]
+margin_left = 668.0
+margin_top = 29.0
+margin_right = 956.0
+margin_bottom = 67.0
+script = ExtResource( 3 )
+
+[connection signal="enemy_HP_Updated" from="." to="EnemyHealthBar" method="_on_Interface_enemy_HP_Updated"]
