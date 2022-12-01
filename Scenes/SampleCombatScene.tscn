@@ -320,6 +320,7 @@ __meta__ = {
 [node name="Background" parent="BulletHell" index="0"]
 visible = false
 
+[connection signal="heal_health" from="." to="BulletHell/Player" method="_on_SampleScene_heal_health"]
 [connection signal="health_changed" from="Interface" to="Interface/HealthBar" method="_on_Interface_health_changed"]
 [connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]
 [connection signal="pressed" from="Options/Wingman1Options/W1O1" to="Options" method="_on_W1O1_pressed"]

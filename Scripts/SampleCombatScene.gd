@@ -12,12 +12,15 @@ onready var myWallAnimator : AnimationPlayer = get_node("BulletHellAnimator")
 var currentState = "wingman1" #wingman1 -> wingman2 -> player -> exeuctingQueue -> enemyAction -> ... repeat
 var actionQueue = []
 
+
+
 # stats
 export (int) var playerSpeed = 100
 export (int) var sodaSpeed = 150
 export (int) var shieldHP = 50
 export (float) var timeInSHMUP = 3.0
-
+export var heal = 10
+signal heal_health(heal)
 func _ready() -> void:
 	myAnimator.play("SceneAnimations")
 	myBulletHell.hide()
@@ -102,6 +105,7 @@ func action_soda():
 func action_rumor():
 	print("rumor")
 func action_console():
+	emit_signal("heal_health", heal)
 	print("console")
 func action_protect():
 	myBulletHell.shield = shieldHP

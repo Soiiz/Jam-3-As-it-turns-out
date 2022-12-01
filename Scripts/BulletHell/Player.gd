@@ -80,9 +80,15 @@ func take_damage(damage):
 		emit_signal("health_changed", hp)
 	print("player hp: ", hp)
 	print("player shield: ", shield)
-
 func setInputAllowed(value : bool):
 	inputAllowed = value;
 
 func getInputAllowed():
 	return inputAllowed
+
+func _on_SampleScene_heal_health(heal):
+	if(hp >= 100):
+		print("cant heal")
+	else:
+		hp += heal
+		emit_signal("health_changed", hp)
