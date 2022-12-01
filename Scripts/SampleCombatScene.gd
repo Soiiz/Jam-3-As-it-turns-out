@@ -13,8 +13,6 @@ onready var myVibeText : Label = get_node("VibeText")
 var currentState = "wingman1" #wingman1 -> wingman2 -> player -> exeuctingQueue -> enemyAction -> ... repeat
 var actionQueue = []
 
-
-
 # stats
 export (int) var playerSpeed = 100
 export (int) var sodaSpeed = 150
@@ -62,8 +60,7 @@ func next_phase() -> void:
 			enemyActionEnd()
 			
 	myTextLabel.text = String(currentState) + "\n" + String(actionQueue)
-	
-	
+		
 func executeQueue():
 	for action in actionQueue:
 		#match actions to function calls
@@ -80,8 +77,7 @@ func executeQueue():
 	yield(get_tree().create_timer(5),"timeout")
 	actionQueue.clear()
 	next_phase()
-	
-	
+		
 func enemyActionStart() -> void:
 	myBulletHell.show()
 	myPlayerCharacter.setInputAllowed(true)
@@ -101,8 +97,6 @@ func enemyActionEnd()->void:
 	if rizz > 0:
 		rizz -= 1
 
-	
-	
 func add_action(_toAdd):
 	actionQueue.push_back(_toAdd)
 	
@@ -155,7 +149,7 @@ func action_flirt():
 	if rizz == 1:
 		multiplier = 2
 	if effectiveQueue[turnNumber] == 1:
-		emit_signal("enemy_rumor", normal_gain * multiplier)
+		emit_signal("enemy_rumor", ineffective_gain * multiplier)
 	elif effectiveQueue[turnNumber] == 2:
 		emit_signal("enemy_rumor", effective_gain * multiplier)
 	else:
@@ -167,6 +161,6 @@ func action_gift():
 	if effectiveQueue[turnNumber] == 1:
 		emit_signal("enemy_rumor", ineffective_gain * multiplier)
 	elif effectiveQueue[turnNumber] == 2:
-		emit_signal("enemy_rumor", ineffective_gain * multiplier)
+		emit_signal("enemy_rumor", normal_gain * multiplier)
 	else:
 		emit_signal("enemy_rumor", effective_gain * multiplier)
