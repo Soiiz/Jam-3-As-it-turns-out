@@ -20,6 +20,7 @@ export (float) var bullet_delay = .2
 var word_timer = 0
 export (float) var word_delay = 1.5
 export (int) var bullet_damage = 10
+export (int) var difficulty = 0 setget set_difficulty
 
 var firingEnabled = true;
 
