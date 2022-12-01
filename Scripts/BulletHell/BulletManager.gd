@@ -159,3 +159,4 @@ func set_playerSpeed(speed: int):
 func set_playerShield(hp: int):
 	print("set shield")
 	targetPlayer.shield = hp
+	

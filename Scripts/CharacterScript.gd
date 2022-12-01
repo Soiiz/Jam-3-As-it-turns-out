@@ -5,6 +5,7 @@ class_name ControllableCharacter
 # Declare member variables here. Examples:
 # var a: int = 2
 # https://www.youtube.com/watch?v=BeSJgUTLmk0&ab_channel=HeartBeast reference for making script
+
 var moveBy : Vector2 = Vector2(0,0);
 var inputAllowed := true setget setInputAllowed, getInputAllowed;
 var ableToBeHit = true

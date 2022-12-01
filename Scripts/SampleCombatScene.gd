@@ -96,8 +96,10 @@ func action_soda():
 	myBulletHell.player_speed = sodaSpeed
 #wingman2
 func action_rumor():
+	
 	pass
 func action_console():
+	
 	pass
 func action_protect():
 	print("protect")

@@ -1,7 +1,6 @@
 extends Node
 
 onready var SceneConnection = get_parent();
-
 func _on_W1O1_pressed() -> void:
 	if !SceneConnection.currentState == "wingman1":
 		return; #"wingman1" #wingman1 -> wingman2 -> player -> exeuctingQueue -> enemyAction
@@ -13,6 +12,7 @@ func _on_W1O2_pressed() -> void:
 		return;
 	SceneConnection.add_action("Rizz")
 	SceneConnection.next_phase()
+	
 	pass # Replace with function body.
 
 func _on_W1O3_pressed() -> void:
