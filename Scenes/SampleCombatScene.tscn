@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://Scripts/SampleCombatScene.gd" type="Script" id=1]
 [ext_resource path="res://Assets/UITheme/kenneyUI-blue.tres" type="Theme" id=2]
@@ -8,6 +8,9 @@
 [ext_resource path="res://Scenes/Interface.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/Enemy.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Assets/background_16x9.png" type="Texture" id=8]
+[ext_resource path="res://Assets/girl.png" type="Texture" id=9]
+[ext_resource path="res://Assets/Right_wingman.png" type="Texture" id=10]
+[ext_resource path="res://Assets/Left_wingman.png" type="Texture" id=11]
 
 [sub_resource type="Animation" id=2]
 resource_name = "Wingman1->2"
@@ -39,6 +42,38 @@ tracks/0/keys = {
 "values": [ 0.0, -90.0 ]
 }
 
+[sub_resource type="StyleBoxFlat" id=4]
+bg_color = Color( 0, 0.576471, 0.741176, 1 )
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color( 0, 0, 0, 1 )
+
+[sub_resource type="StyleBoxFlat" id=5]
+bg_color = Color( 0.694118, 0.694118, 0.694118, 1 )
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color( 0, 0, 0, 1 )
+
+[sub_resource type="StyleBoxFlat" id=6]
+bg_color = Color( 0.643137, 0, 0, 1 )
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color( 0, 0, 0, 1 )
+
+[sub_resource type="StyleBoxFlat" id=7]
+bg_color = Color( 0.694118, 0.694118, 0.694118, 1 )
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color( 0, 0, 0, 1 )
+
 [node name="SampleScene" type="Node2D"]
 script = ExtResource( 1 )
 playerSpeed = 150
@@ -55,15 +90,21 @@ texture = ExtResource( 8 )
 
 [node name="Enemy" parent="." instance=ExtResource( 7 )]
 
+[node name="Girl" type="Sprite" parent="Enemy"]
+position = Vector2( 599, 299 )
+scale = Vector2( 0.317227, 0.317227 )
+texture = ExtResource( 9 )
+
 [node name="DebugText" type="RichTextLabel" parent="."]
+margin_top = 23.0
 margin_right = 276.0
-margin_bottom = 77.0
+margin_bottom = 100.0
 text = "text"
 
 [node name="Button" type="Button" parent="."]
-margin_top = -327.0
+margin_top = -304.0
 margin_right = 103.0
-margin_bottom = -254.0
+margin_bottom = -231.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 reset_on_save = false
@@ -71,6 +112,12 @@ anims/SceneAnimations = ExtResource( 3 )
 anims/Wingman1->2 = SubResource( 2 )
 anims/Wingman2->Player = SubResource( 3 )
 blend_times = [ "SceneAnimations", "SceneAnimations", 1.0, "SceneAnimations", "Wingman1->2", 1.0, "SceneAnimations", "Wingman2->Player", 1.0 ]
+
+[node name="TextEdit" type="TextEdit" parent="."]
+margin_left = 353.0
+margin_top = 519.0
+margin_right = 900.0
+margin_bottom = 722.0
 
 [node name="VibeText" type="Label" parent="."]
 margin_left = 118.0
@@ -198,6 +245,11 @@ __meta__ = {
 "_edit_use_anchors_": true
 }
 
+[node name="LeftWingman" type="Sprite" parent="."]
+position = Vector2( 121, 552 )
+scale = Vector2( 0.455526, 0.455526 )
+texture = ExtResource( 11 )
+
 [node name="Interface" parent="." instance=ExtResource( 6 )]
 
 [node name="HealthBar" parent="Interface" index="0"]
@@ -207,12 +259,19 @@ margin_left = 13.0
 margin_top = 670.0
 margin_right = 301.0
 margin_bottom = 701.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_styles/fg = SubResource( 4 )
+custom_styles/bg = SubResource( 5 )
+value = 59.0
 
 [node name="EnemyHealthBar" parent="Interface" index="1"]
 margin_left = 968.0
 margin_top = 12.0
 margin_right = 1256.0
 margin_bottom = 50.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_styles/fg = SubResource( 6 )
+custom_styles/bg = SubResource( 7 )
 
 [node name="BulletHell" parent="." instance=ExtResource( 4 )]
 word_delay = 1.0
@@ -224,6 +283,11 @@ color = Color( 0, 0, 0, 0.784314 )
 
 [node name="Player" parent="BulletHell" index="1"]
 visible = false
+
+[node name="RightWingman" type="Sprite" parent="."]
+position = Vector2( 1158.36, 529.75 )
+scale = Vector2( 0.516846, 0.516846 )
+texture = ExtResource( 10 )
 
 [connection signal="enemy_rumor" from="." to="Enemy" method="_on_SampleScene_enemy_rumor"]
 [connection signal="heal_health" from="." to="BulletHell/Player" method="_on_SampleScene_heal_health"]
