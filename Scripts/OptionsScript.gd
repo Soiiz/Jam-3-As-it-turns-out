@@ -73,13 +73,13 @@ func _on_Player3_pressed() -> void:
 	pass # Replace with function body.
 
 
-func _on_Interface_enemy_lost(lost):
+func _on_Interface_enemy_lost(_lost):
 	$Wingman1Options.hide()
 	$Wingman2Options.hide()
 	$PlayerOptions.hide()
 
 
-func _on_Interface_game_over(win):
+func _on_Interface_game_over(_win):
 	$Wingman1Options.hide()
 	$Wingman2Options.hide()
 	$PlayerOptions.hide()
