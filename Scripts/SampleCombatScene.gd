@@ -12,7 +12,7 @@ onready var myVibeBox : ColorRect = get_node("VibeBox")
 
 var currentState = "wingman1" #wingman1 -> wingman2 -> player -> exeuctingQueue -> enemyAction -> ... repeat
 var actionQueue = []
-
+var test = false
 # stats
 export (int) var playerSpeed = 100
 export (int) var sodaSpeed = 150
@@ -31,6 +31,7 @@ func _ready() -> void:
 	myVibeText.hide()
 	myVibeBox.hide()
 	myPlayerCharacter.setInputAllowed(false)
+	test = true
 
 # enemy effectives 
 var turnNumber = 0
@@ -177,3 +178,4 @@ func _on_Button_pressed():
 	var error = get_tree().reload_current_scene()
 	if error != OK:
 		print("Error reloading scene: " + str(error))
+
