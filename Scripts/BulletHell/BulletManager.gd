@@ -133,7 +133,8 @@ func targeted_shot():
 		position += Vector2(length / (word.length() - 1), 0)
 	for bullet in letter_list:
 		var bullet_vector = bullet[1].normalized() * longest_distance
-		shoot(bullet[0], bullet_speed, player_position - bullet_vector, bullet[1].angle() * 180 / PI)
+        if bullet[0] != " ":
+		    shoot(bullet[0], bullet_speed, player_position - bullet_vector, bullet[1].angle() * 180 / PI)
 		
 		
 #reverse string function
