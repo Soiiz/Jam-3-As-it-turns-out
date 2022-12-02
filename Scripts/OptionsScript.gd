@@ -71,3 +71,15 @@ func _on_Player3_pressed() -> void:
 	SceneConnection.next_phase()
 
 	pass # Replace with function body.
+
+
+func _on_Interface_enemy_lost(lost):
+	$Wingman1Options.hide()
+	$Wingman2Options.hide()
+	$PlayerOptions.hide()
+
+
+func _on_Interface_game_over(win):
+	$Wingman1Options.hide()
+	$Wingman2Options.hide()
+	$PlayerOptions.hide()
