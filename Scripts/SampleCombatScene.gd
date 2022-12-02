@@ -125,6 +125,7 @@ func action_vibecheck():
 		1: myVibeText.text += "compliment"
 		2: myVibeText.text += "flirt"
 		3: myVibeText.text += "gift"
+	yield(get_tree().create_timer(5),"timeout")
 	myVibeText.hide()
 	myVibeBox.hide()
 func action_rizz():
