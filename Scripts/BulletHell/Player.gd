@@ -5,7 +5,9 @@ class_name ControllableCharacter
 export (int) var speed = 200
 export (int) var hp = 100 # subject to implementation change as values need to be passed around
 export (int) var shield = 10 # subject to value change
+export var win = false;
 signal health_changed(hp)
+signal game_over(win)
 var inputAllowed := true setget setInputAllowed, getInputAllowed;
 
 var velocity = Vector2()
@@ -78,6 +80,11 @@ func take_damage(damage):
 	else:
 		hp -= damage
 		emit_signal("health_changed", hp)
+	if (hp <= 0):
+		print("game over")
+		win = false
+		emit_signal("game_over", win)
+		
 	print("player hp: ", hp)
 	print("player shield: ", shield)
 func setInputAllowed(value : bool):

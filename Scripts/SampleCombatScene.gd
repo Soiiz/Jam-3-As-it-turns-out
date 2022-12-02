@@ -107,10 +107,6 @@ func enemyActionEnd()->void:
 func add_action(_toAdd):
 	actionQueue.push_back(_toAdd)
 	
-func _on_Button_pressed() -> void:
-	next_phase()
-	pass # Replace with function body.
-	
 #need implementing
 #wingman1 (done)
 func action_vibecheck():
@@ -176,3 +172,7 @@ func action_gift():
 		emit_signal("enemy_rumor", normal_gain * multiplier)
 	else:
 		emit_signal("enemy_rumor", effective_gain * multiplier)
+
+
+func _on_Button_pressed():
+	get_tree().reload_current_scene()
