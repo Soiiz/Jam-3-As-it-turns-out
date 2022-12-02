@@ -7,7 +7,6 @@ onready var myButton : Button = get_node("Button")
 onready var myAnimator : AnimationPlayer = get_node("AnimationPlayer")
 onready var myPlayerCharacter = get_node("BulletHell/Player")
 onready var myBulletHell = get_node("BulletHell")
-onready var myWallAnimator : AnimationPlayer = get_node("BulletHellAnimator")
 onready var myVibeText : Label = get_node("VibeText")
 
 var currentState = "wingman1" #wingman1 -> wingman2 -> player -> exeuctingQueue -> enemyAction -> ... repeat
@@ -84,7 +83,6 @@ func executeQueue():
 func enemyActionStart() -> void:
 	myBulletHell.show()
 	myPlayerCharacter.setInputAllowed(true)
-	myWallAnimator.play("WallsMoveIn")
 	yield(get_tree().create_timer(timeInSHMUP),"timeout")
 	next_phase()
 	
@@ -94,7 +92,6 @@ func enemyActionEnd()->void:
 	myBulletHell.player_speed = playerSpeed
 	myBulletHell.shield = 0
 	myPlayerCharacter.setInputAllowed(false)
-	myWallAnimator.play_backwards("WallsMoveIn")
 	# set to next turn
 	turnNumber += 1
 	if rizzAction == true:

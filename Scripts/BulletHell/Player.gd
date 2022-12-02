@@ -15,7 +15,7 @@ onready var shieldObj = $Shield
 onready var tweenObj = $Tween
 
 # delay for when player can take damage again
-export (float) var invun_frames = 10
+export (float) var invun_frames = 10.0
 var invun_timer = 0
 
 # Called when the node enters the scene tree for the first time.
@@ -52,7 +52,7 @@ func _physics_process(delta):
 	position.y = clamp(position.y, sprite.texture.get_height() * sprite.scale.y / 2, get_viewport_rect().size.y - sprite.texture.get_height() * sprite.scale.y / 2)
 	# rotate sprite based on velocity direction
 	if velocity.length() > 0:
-		rotation = velocity.angle() + PI*3/2
+		rotation = velocity.angle() + PI*1/2
 		
 	# shows and hides shield based on shield hp (probably a better way to do this)
 	if shield > 0:

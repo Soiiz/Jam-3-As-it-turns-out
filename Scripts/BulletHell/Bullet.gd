@@ -8,7 +8,9 @@ var letter = "" setget set_letter
 var damage = 10
 
 func _ready():
-	connect("body_entered", self, "on_body_entered")
+	var error = connect("body_entered", self, "on_body_entered")
+	if error != OK:
+		print("Error connecting signal: ", error)
 
 func _process(delta):
 	position += velocity * delta

@@ -8,5 +8,8 @@ func _ready():
 	pass # Replace with function body.
 
 func save_drawing(name : String, drawing : Array): #drawing must be of specific type
-	drawing.duplicate(true);
+	var error = drawing.duplicate(true)
+	if error != OK:
+		print("Error saving drawing")
+		return
 	globalDrawings[name] = drawing
