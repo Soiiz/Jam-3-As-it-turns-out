@@ -8,6 +8,7 @@ onready var myAnimator : AnimationPlayer = get_node("AnimationPlayer")
 onready var myPlayerCharacter = get_node("BulletHell/Player")
 onready var myBulletHell = get_node("BulletHell")
 onready var myVibeText : Label = get_node("VibeText")
+onready var myVibeBox : ColorRect = get_node("VibeBox")
 
 var currentState = "wingman1" #wingman1 -> wingman2 -> player -> exeuctingQueue -> enemyAction -> ... repeat
 var actionQueue = []
@@ -27,6 +28,8 @@ func _ready() -> void:
 	myBulletHell.shield = 0
 	myBulletHell.player_speed = playerSpeed
 	myBulletHell.set_difficulty(0)
+	myVibeText.hide()
+	myVibeBox.hide()
 	myPlayerCharacter.setInputAllowed(false)
 
 # enemy effectives 
@@ -113,6 +116,7 @@ func _on_Button_pressed() -> void:
 func action_vibecheck():
 	# horrendous way to code this but im too lazy to do it properly
 	myVibeText.show()
+	myVibeBox.show()
 	myVibeText.text = "Vibe Check: Love interest will be more effective next turn with "
 	match effectiveQueue[turnNumber+1]:
 		1: myVibeText.text += "compliment"
@@ -126,6 +130,7 @@ func action_vibecheck():
 		3: myVibeText.text += "gift"
 	yield(get_tree().create_timer(5),"timeout")
 	myVibeText.hide()
+	myVibeBox.hide()
 func action_rizz():
 	rizzAction = true
 func action_soda():
