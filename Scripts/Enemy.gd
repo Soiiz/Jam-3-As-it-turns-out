@@ -10,8 +10,7 @@ func ready():
 func _on_SampleScene_enemy_rumor(interest_gain):
 	interest += interest_gain
 	emit_signal("enemy_HP_Updated", interest)
+	if(interest >= 100):
+		lost = true
+		emit_signal("enemy_lost", lost)
 	print("interest: " + str(interest))
-
-func npc_lost():
-	lost = true
-	emit_signal(("enemy_lost"), lost)

@@ -5,7 +5,7 @@ const bullet = preload("res://prefabs/BulletHell/Bullet.tscn")
 var bullet_speed = 100
 var player_speed = 100 setget set_playerSpeed
 var shield = 0 setget set_playerShield
-
+var status = false
 #mode of bullet hell
 #0: all firing modes
 #1: carpet shots
@@ -40,6 +40,7 @@ var word_list = ["Cringe", "Gamer", "Nerd", "Hanzo Main", "Smelly", "Baka",
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	status = true
 	pass # Replace with function body.
 
 func shoot(letter: String, speed : int, position : Vector2, direction: float):
@@ -56,16 +57,17 @@ func _process(delta):
 		return
 
 	# shoots bullets from queue if timer is up
-	if timer <= 0 and queue.size() > 0:
-		for word in queue:
-			if(word[0][0] != " "):
-				shoot(word[0][0], bullet_speed, word[0][1], word[0][2])
-			word.pop_front()
-			if(word.size() == 0):
-				queue.erase(word)
-		timer = bullet_delay
-	else:
-		timer -= delta
+	if(status == true):
+		if timer <= 0 and queue.size() > 0:
+			for word in queue:
+				if(word[0][0] != " "):
+					shoot(word[0][0], bullet_speed, word[0][1], word[0][2])
+				word.pop_front()
+				if(word.size() == 0):
+					queue.erase(word)
+			timer = bullet_delay
+		else:
+			timer -= delta
 
 	# runs functions to add bullets to queue
 	if word_timer <= 0:
@@ -155,9 +157,10 @@ func hide():
 
 
 func show():
-	firingEnabled = true
-	targetPlayer.show()
-	background.show()
+	if(status == true):
+		firingEnabled = true
+		targetPlayer.show()
+		background.show()
 
 func set_difficulty(level: int):
 	difficulty = level
@@ -192,3 +195,7 @@ func _on_Interface_game_over(win):
 		bullet.queue_free()
 	targetPlayer.hide()
 	background.hide()
+
+
+func _on_Interface_enemy_lost(lost):
+	status = false
