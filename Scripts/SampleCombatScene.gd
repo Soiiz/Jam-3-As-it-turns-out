@@ -179,6 +179,6 @@ func _on_Button_pressed():
 	var error = get_tree().reload_current_scene()
 	if error != OK:
 		print("Error reloading scene: " + str(error))
-func _on_Interface_enemy_lost(lost):
+func _on_Interface_enemy_lost(_lost):
 	myVibeText.hide()
 	myVibeBox.hide()
