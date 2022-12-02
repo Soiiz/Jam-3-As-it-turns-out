@@ -188,7 +188,7 @@ func set_playerShield(hp: int):
 	targetPlayer.shield = hp
 
 
-func _on_Interface_game_over(win):
+func _on_Interface_game_over(_win):
 	firingEnabled = false
 	for bullet in bullets.get_children():
 		bullet.hide()
@@ -197,5 +197,5 @@ func _on_Interface_game_over(win):
 	background.hide()
 
 
-func _on_Interface_enemy_lost(lost):
+func _on_Interface_enemy_lost(_lost):
 	status = false

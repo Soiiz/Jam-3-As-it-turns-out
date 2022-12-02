@@ -124,7 +124,6 @@ func action_vibecheck():
 		1: myVibeText.text += "compliment"
 		2: myVibeText.text += "flirt"
 		3: myVibeText.text += "gift"
-	yield(get_tree().create_timer(5),"timeout")
 	myVibeText.hide()
 	myVibeBox.hide()
 func action_rizz():
@@ -175,4 +174,6 @@ func action_gift():
 
 
 func _on_Button_pressed():
-	get_tree().reload_current_scene()
+	var error = get_tree().reload_current_scene()
+	if error != OK:
+		print("Error reloading scene: " + str(error))
