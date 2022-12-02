@@ -15,7 +15,7 @@ onready var shieldObj = $Shield
 onready var tweenObj = $Tween
 
 # delay for when player can take damage again
-export (float) var invun_frames = 10
+export (float) var invun_frames = 10.0
 var invun_timer = 0
 
 # Called when the node enters the scene tree for the first time.
