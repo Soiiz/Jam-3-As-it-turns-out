@@ -183,3 +183,12 @@ func set_playerSpeed(speed: int):
 
 func set_playerShield(hp: int):
 	targetPlayer.shield = hp
+
+
+func _on_Interface_game_over(win):
+	firingEnabled = false
+	for bullet in bullets.get_children():
+		bullet.hide()
+		bullet.queue_free()
+	targetPlayer.hide()
+	background.hide()
