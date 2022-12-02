@@ -1,6 +1,6 @@
 extends Node
 
-const bullet = preload("res://prefabs/BulletHell/Bullet.tscn")
+const bullet = preload("res://Prefabs/BulletHell/Bullet.tscn")
 
 var bullet_speed = 100
 var player_speed = 100 setget set_playerSpeed
