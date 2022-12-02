@@ -354,6 +354,8 @@ text = "You Lose"
 [connection signal="pressed" from="Options/PlayerOptions/Player3" to="Options" method="_on_Player3_pressed"]
 [connection signal="game_over" from="BulletHell/Player" to="Interface" method="_on_Player_game_over"]
 [connection signal="health_changed" from="BulletHell/Player" to="Interface" method="_on_Player_health_changed"]
+[connection signal="enemy_lost" from="Interface" to="." method="_on_Interface_enemy_lost"]
+[connection signal="enemy_lost" from="Interface" to="Enemy" method="_on_Interface_enemy_lost"]
 [connection signal="enemy_lost" from="Interface" to="Options" method="_on_Interface_enemy_lost"]
 [connection signal="enemy_lost" from="Interface" to="BulletHell" method="_on_Interface_enemy_lost"]
 [connection signal="game_over" from="Interface" to="Options" method="_on_Interface_game_over"]

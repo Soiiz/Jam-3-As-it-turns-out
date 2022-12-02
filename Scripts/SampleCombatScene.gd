@@ -175,4 +175,10 @@ func action_gift():
 
 
 func _on_Button_pressed():
-	get_tree().reload_current_scene()
+	var error = get_tree().reload_current_scene()
+	if error != OK:
+		print("Error reloading scene: " + str(error))
+	
+func _on_Interface_enemy_lost(lost):
+	myVibeText.hide()
+	myVibeBox.hide()
