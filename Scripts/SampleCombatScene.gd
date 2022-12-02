@@ -12,7 +12,7 @@ onready var myVibeBox : ColorRect = get_node("VibeBox")
 
 var currentState = "wingman1" #wingman1 -> wingman2 -> player -> exeuctingQueue -> enemyAction -> ... repeat
 var actionQueue = []
-
+var test = false
 # stats
 export (int) var playerSpeed = 100
 export (int) var sodaSpeed = 150
@@ -31,6 +31,7 @@ func _ready() -> void:
 	myVibeText.hide()
 	myVibeBox.hide()
 	myPlayerCharacter.setInputAllowed(false)
+	test = true
 
 # enemy effectives 
 var turnNumber = 0
@@ -124,7 +125,6 @@ func action_vibecheck():
 		1: myVibeText.text += "compliment"
 		2: myVibeText.text += "flirt"
 		3: myVibeText.text += "gift"
-	yield(get_tree().create_timer(5),"timeout")
 	myVibeText.hide()
 	myVibeBox.hide()
 func action_rizz():
@@ -175,9 +175,9 @@ func action_gift():
 
 
 func _on_Button_pressed():
-	get_tree().reload_current_scene()
-
-
+	var error = get_tree().reload_current_scene()
+	if error != OK:
+		print("Error reloading scene: " + str(error))
 func _on_Interface_enemy_lost(lost):
 	myVibeText.hide()
 	myVibeBox.hide()

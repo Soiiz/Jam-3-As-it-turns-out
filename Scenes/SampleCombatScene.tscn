@@ -124,6 +124,25 @@ anims/Wingman1->2 = SubResource( 2 )
 anims/Wingman2->Player = SubResource( 3 )
 blend_times = [ "SceneAnimations", "SceneAnimations", 1.0, "SceneAnimations", "Wingman1->2", 1.0, "SceneAnimations", "Wingman2->Player", 1.0 ]
 
+[node name="VibeBox" type="ColorRect" parent="."]
+margin_left = 239.0
+margin_top = 270.0
+margin_right = 1026.0
+margin_bottom = 412.0
+color = Color( 0, 0, 0, 0.784314 )
+
+[node name="VibeText" type="Label" parent="."]
+margin_left = 234.0
+margin_top = 250.0
+margin_right = 1031.0
+margin_bottom = 433.0
+custom_fonts/font = SubResource( 8 )
+text = "
+sdfasdfsdfsdff"
+align = 1
+valign = 1
+autowrap = true
+
 [node name="Options" type="Node2D" parent="."]
 position = Vector2( 630, 713 )
 rotation = -1.5708
@@ -248,25 +267,6 @@ texture = ExtResource( 11 )
 position = Vector2( 1158.36, 529.75 )
 scale = Vector2( 0.516846, 0.516846 )
 texture = ExtResource( 10 )
-
-[node name="VibeBox" type="ColorRect" parent="."]
-margin_left = 239.0
-margin_top = 270.0
-margin_right = 1026.0
-margin_bottom = 412.0
-color = Color( 0, 0, 0, 0.784314 )
-
-[node name="VibeText" type="Label" parent="."]
-margin_left = 234.0
-margin_top = 250.0
-margin_right = 1031.0
-margin_bottom = 433.0
-custom_fonts/font = SubResource( 8 )
-text = "
-sdfasdfsdfsdff"
-align = 1
-valign = 1
-autowrap = true
 
 [node name="BulletHell" parent="." instance=ExtResource( 4 )]
 word_delay = 1.0
