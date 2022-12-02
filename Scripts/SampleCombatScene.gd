@@ -12,7 +12,7 @@ onready var myVibeBox : ColorRect = get_node("VibeBox")
 
 var currentState = "wingman1" #wingman1 -> wingman2 -> player -> exeuctingQueue -> enemyAction -> ... repeat
 var actionQueue = []
-
+var test = false
 # stats
 export (int) var playerSpeed = 100
 export (int) var sodaSpeed = 150
@@ -31,6 +31,7 @@ func _ready() -> void:
 	myVibeText.hide()
 	myVibeBox.hide()
 	myPlayerCharacter.setInputAllowed(false)
+	test = true
 
 # enemy effectives 
 var turnNumber = 0
@@ -176,3 +177,8 @@ func action_gift():
 
 func _on_Button_pressed():
 	get_tree().reload_current_scene()
+
+
+func _on_Interface_enemy_lost(lost):
+	myVibeText.hide()
+	myVibeBox.hide()
