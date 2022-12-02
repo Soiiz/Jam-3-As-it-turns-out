@@ -133,8 +133,8 @@ func targeted_shot():
 		position += Vector2(length / (word.length() - 1), 0)
 	for bullet in letter_list:
 		var bullet_vector = bullet[1].normalized() * longest_distance
-        if bullet[0] != " ":
-		    shoot(bullet[0], bullet_speed, player_position - bullet_vector, bullet[1].angle() * 180 / PI)
+		if bullet[0] != " ":
+			shoot(bullet[0], bullet_speed, player_position - bullet_vector, bullet[1].angle() * 180 / PI)
 		
 		
 #reverse string function
@@ -160,23 +160,23 @@ func show():
 	background.show()
 
 func set_difficulty(level: int):
-    difficulty = level
-    bullet_speed = 100 + 50 * difficulty
-    bullet_delay = 0.5 - 0.05 * difficulty
-    if bullet_delay < 0.01:
-        bullet_delay = 0.01
-    word_delay = 1.2 - 0.1 * difficulty
-    if word_delay < 0.01:
-        word_delay = 0.01
-    bullet_damage = 10 + 2 * difficulty
-    if difficulty < 2:
-        mode = 1
-    elif difficulty < 4:
-        mode = 2
-    elif difficulty < 5:
-        mode = 3
-    elif difficulty >= 6:
-        mode = 0
+	difficulty = level
+	bullet_speed = 100 + 50 * difficulty
+	bullet_delay = 0.5 - 0.05 * difficulty
+	if bullet_delay < 0.01:
+		bullet_delay = 0.01
+	word_delay = 1.2 - 0.1 * difficulty
+	if word_delay < 0.01:
+		word_delay = 0.01
+	bullet_damage = 10 + 2 * difficulty
+	if difficulty < 2:
+		mode = 1
+	elif difficulty < 4:
+		mode = 2
+	elif difficulty < 5:
+		mode = 3
+	elif difficulty >= 6:
+		mode = 0
 
 func set_playerSpeed(speed: int):
 	targetPlayer.speed = speed
